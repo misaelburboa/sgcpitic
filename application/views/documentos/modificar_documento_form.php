@@ -36,8 +36,8 @@
 			'readonly' => 'readonly',
 			'value' => $doc->archivo
 			);
-		$id_calidad = array(
-			'name' => 'id_calidad',
+		$id_calidad_readonly = array(
+			'name' => 'id_calidad_readonly',
 			'class' => 'form-control',
 			'placeholder' => 'Escriba el id de calidad',
 			'readonly' => 'readonly',
@@ -127,14 +127,15 @@
 	<span style="text-align:center;"><h3>Modificar:<nr /> <?php echo $doc->nombre_documento; ?></h3></span>
 	<div class="form-group">
 		<?php echo form_hidden('id_documento', $doc->id_documento); ?>
+		<?php echo form_hidden('id_calidad', $doc->id_calidad); ?>
 		<label for="nombre_documento">Documento:</label>
 		<?php echo form_input($nombre_documento); ?>
 	</div>
 	<div class="form-group">
 		<div class="row">
 			<div class="col-xs-4">
-				<label for="id_calidad">ID Calidad:</label>
-				<?php echo form_input($id_calidad); ?>
+				<label for="id_calidad_readonly">ID Calidad:</label>
+				<?php echo form_input($id_calidad_readonly); ?>
 			</div>
 			<div class="col-xs-4">
 				<label for="archivo_en_servidor">Archivo en Servidor:</label>

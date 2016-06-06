@@ -1,4 +1,4 @@
-a:2:{s:6:"expire";i:1464717060;s:7:"headers";a:0:{}}ENDCI---><html>
+a:2:{s:6:"expire";i:1465228692;s:7:"headers";a:0:{}}ENDCI---><html>
 	<head>
 		<title>SGCPitic</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -42,7 +42,7 @@ a:2:{s:6:"expire";i:1464717060;s:7:"headers";a:0:{}}ENDCI---><html>
 	</head>
 <body>
 	<header id="header">
-		<img src=http://calidad.tpitic.com.mx/SGCPITIC//img/pitic-logo.png id="logoPitic" />
+		<a href="./home"><img src=http://calidad.tpitic.com.mx/SGCPITIC//img/pitic-logo.png id="logoPitic" /></a>
 	</header>
 	<section id="contenedor">
 		<div id="contenido"><style type="text/css">
@@ -64,16 +64,7 @@ a:2:{s:6:"expire";i:1464717060;s:7:"headers";a:0:{}}ENDCI---><html>
 		text-align: center;
 	}
 </style>
-	<h3>Resultados de búsqueda para: <br />'<span style='color:red;'>asce</span>'<hr /></h3><div style='text-align:left'><a href='javascript:history.back(-1);'> << Volver</a></div><br /><table border=1 id="documentos" cellpadding=2 cellspacing=1 width=100%>
-<thead>
-<tr>
-<th>#</th><th>Documento</th><th>ID Calidad</th><th>Revisión</th><th>Generado por</th><th>Tiempo de Retención</th><th>Responsable</th><th>Nom. Archivo</th></tr>
-</thead>
-<tbody>
-<tr bgcolor="#B5FFB4">
-<td>1</td><td><a href='document/36'>PROCEDIMIENTO DE ASCENSOS, CAMBIO DE FLOTILLA Y CAMBIO DE MANOS</a></td><td>DT-SOP-PROC32</td><td>5.0</td><td>NA</td><td>0 dia(s)</td><td>Coordinador de Calidad</td><td><a href='uploads/DT-SOP-PROC32.pptx'>DT-SOP-PROC32.pptx</a></td></tr>
-</tbody>
-</table>			</div><!--Fin del div de contenido-->
+	<h3>No se han encontrado resultados para: <br />'<span style='color:red;'>asd</span>'<hr /></h3><div style='text-align:left'><a href='javascript:history.back(-1);'> << Volver</a></div><br />			</div><!--Fin del div de contenido-->
 		</section>
 		<footer id="footer" style="
 		background-color:#006547;

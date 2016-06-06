@@ -66,6 +66,7 @@ class DocumentosController extends CI_Controller {
 					'id_calidad' => $this->input->post('id_calidad'),
 					'revision' => $this->input->post('revision'),
 					'subrevision' => '0',
+					'fecha_revision' => $this->input->post('revision'),
 					'doc_que_lo_genera' => $this->input->post('doc_que_lo_genera'),
 					'fecha_creacion' => date('Y-m-d H:m:s'),
 					'tiempo_retencion_uni' => $this->input->post('tiempo_retencion_uni'),
@@ -74,6 +75,7 @@ class DocumentosController extends CI_Controller {
 					'responsable' => $this->input->post('responsable'),
 					'id_tipo' => $this->input->post('tipo'),
 					'archivo' => $data['uploaded_data_info']['file_name'],
+					'vista_archivo' => $this->input->post('id_calidad').'.pdf',
 					'activo' => '1'
 				);
 
@@ -84,6 +86,7 @@ class DocumentosController extends CI_Controller {
 					if($this->DocumentosModel->addDocument($newDocData)){
 						$datos = array(
 							'id_cambio' => null,
+							'id_calidad' => $this->input->post('id_calidad'),
 							'nombre_documento' => $this->input->post('nombre_documento'),
 							'id_documento' => $lastDocumentID,
 							'fecha_cambio' => date('Y-m-d h:m:s'),
@@ -201,10 +204,10 @@ class DocumentosController extends CI_Controller {
 						$this->table->set_template($tpl);
 						if($doc_que_lo_genera!=0){
 							foreach($datos2->result() as $gp){
-								$this->table->add_row($i, "<a href='document/".$doc->id_documento."'>".$doc->nombre_documento."</a>", $doc->id_calidad, $doc->revision.".".$doc->subrevision, $gp->nombre_documento, $doc->tiempo_retencion_uni." ".$doc->tiempo_retencion_desc, $doc->nombre_puesto, "<a href='".self::DOCS_DIR."/".$doc->archivo."'>".$doc->archivo."</a>");
+								$this->table->add_row($i, "<a href='document/".$doc->id_documento."'>".$doc->nombre_documento."</a>", $doc->id_calidad, $doc->revision.".".$doc->subrevision, $gp->nombre_documento, $doc->tiempo_retencion_uni." ".$doc->tiempo_retencion_desc, $doc->nombre_puesto, "<a href='".self::DOCS_DIR."/".$doc->vista_archivo."'>".$doc->id_calidad."</a>");
 							}
 						}else{
-							$this->table->add_row($i, "<a href='document/".$doc->id_documento."'>".$doc->nombre_documento."</a>", $doc->id_calidad, $doc->revision.".".$doc->subrevision, "NA", $doc->tiempo_retencion_uni." ".$doc->tiempo_retencion_desc, $doc->nombre_puesto, "<a href='".self::DOCS_DIR."/".$doc->archivo."'>".$doc->archivo."</a>");
+							$this->table->add_row($i, "<a href='document/".$doc->id_documento."'>".$doc->nombre_documento."</a>", $doc->id_calidad, $doc->revision.".".$doc->subrevision, "NA", $doc->tiempo_retencion_uni." ".$doc->tiempo_retencion_desc, $doc->nombre_puesto, "<a href='".self::DOCS_DIR."/".$doc->vista_archivo."'>".$doc->id_calidad."</a>");
 						}
 						$i++;
 					}
@@ -288,12 +291,14 @@ class DocumentosController extends CI_Controller {
 					'tiempo_retencion_desc' => $this->input->post('tiempo_retencion_desc'),
 					'responsable' => $this->input->post('responsable'),
 					'revision' => $revision,
-					'subrevision' => $subrevision
+					'subrevision' => $subrevision,
+					'fecha_revision' => date('Y-m-d')
 					);
 
 				$datos = array(
 					'id_cambio' => null,
 					'nombre_documento' => $this->input->post('nombre_documento'),
+					'id_calidad' => $this->input->post('id_calidad'),
 					'id_documento' => $this->input->post('id_documento'),
 					'fecha_cambio' => date('Y-m-d h:m:s'),
 					'causa_cambio' => $this->input->post('causa_cambio'),
@@ -301,7 +306,7 @@ class DocumentosController extends CI_Controller {
 					'usuario' => $this->session->userdata('usuario'),
 					'revision_ant' => $revisionAnt,
 					'revision_actual' => $revisionAct,
-					'archivo_obsoleto' => "NA"
+					'archivo_obsoleto' => "NA",
 					);
 
 				$result = $this->DocumentosModel->actualizarDocumento($documento);
@@ -320,12 +325,15 @@ class DocumentosController extends CI_Controller {
 					$texto['texto2'] = $result['message'];
 				}
 			}else{
+				//mover el archivo a versiones obsoletas y borrar el pdf
 				if(file_exists('./'.self::DOCS_DIR.'/'.$this->input->post('archivo_en_servidor'))){
 					if(file_exists('./'.self::DOCS_DIR.'/Versiones obsoletas/'.date('Y'))){
 			    		rename('./'.self::DOCS_DIR.'/'.$this->input->post('archivo_en_servidor'), './'.self::DOCS_DIR.'/Versiones obsoletas/'.date('Y')."/Rev.".($revisionAnt)."-".$this->input->post('archivo_en_servidor'));
+						@unlink('./'.self::DOCS_DIR.'/'.$this->input->post('id_calidad').'.pdf');
 			    	}else{
 			    		mkdir('./'.self::DOCS_DIR.'/Versiones obsoletas/'.date('Y'));
 						rename('./'.self::DOCS_DIR.'/'.$this->input->post('archivo_en_servidor'), './'.self::DOCS_DIR.'/Versiones obsoletas/'.date('Y')."/Rev.".($revisionAnt)."-".$this->input->post('archivo_en_servidor'));
+						@unlink('./'.self::DOCS_DIR.'/'.$this->input->post('id_calidad').'.pdf');
 			    	}
 			    }
 				$file_configs['file_name'] = $this->input->post('id_calidad');
@@ -345,6 +353,7 @@ class DocumentosController extends CI_Controller {
 					$this->load->view('templates/footer');
 			    }else{
 			    	$uploadedData = array('uploaded_data_info' => $this->upload->data());
+					//preparamos la información para actualizar la tabla de documentos en la base de datos
 			    	$documento = array(
 			    		'id_documento' => $this->input->post('id_documento'),
 						'nombre_documento' => $this->input->post('nombre_documento'),
@@ -355,13 +364,22 @@ class DocumentosController extends CI_Controller {
 						'responsable' => $this->input->post('responsable'),
 						'archivo' => $uploadedData['uploaded_data_info']['file_name'],
 						'revision' => $revision,
-						'subrevision' => $subrevision
+						'subrevision' => $subrevision,
+						'fecha_revision' => date('Y-m-d')
 					);
-
+					
+					//generamos el pdf con libreoffice que tiene la utilidad soffice
+					//es requerimiento tener instalado libreoffice en el servidor y la utilidad headless
+					//yum install libreoffice
+					//yum install openoffice.org-headless
+					exec('soffice --headless --convert-to pdf --outdir '.$_SERVER['DOCUMENT_ROOT'].'/SGCPITIC/'.self::DOCS_DIR.'/ '.$_SERVER['DOCUMENT_ROOT'].'/SGCPITIC/'.self::DOCS_DIR.'/'.$uploadedData['uploaded_data_info']['file_name'], $output, $return);
+					
+					//preparamos la informacion para actualizar el log la base de datos
 					$datos = array(
 						'id_cambio' => null,
 						'nombre_documento' => $this->input->post('nombre_documento'),
 						'id_documento' => $this->input->post('id_documento'),
+						'id_calidad' => $this->input->post('id_calidad'),
 						'fecha_cambio' => date('Y-m-d h:m:s'),
 						'causa_cambio' => $this->input->post('causa_cambio'),
 						'desc_cambio' => $this->input->post('desc_cambio'),
@@ -370,7 +388,7 @@ class DocumentosController extends CI_Controller {
 						'revision_actual' => $revisionAct,
 						'archivo_obsoleto' => "Rev.".($revisionAnt)."-".$this->input->post('archivo_en_servidor')
 						);
-
+					
 					$result = $this->DocumentosModel->actualizarDocumento($documento);
 					if($result['state']){
 						$texto['texto1'] = "Completado";
@@ -427,6 +445,7 @@ class DocumentosController extends CI_Controller {
 					'id_cambio' => null,
 					'nombre_documento' => $documento->nombre_documento,
 					'id_documento' => $id_documento,
+					'id_calidad' => $this->input->post('id_calidad'),
 					'fecha_cambio' => date('Y-m-d h:m:s'),
 					'causa_cambio' => 'Documento Eliminado',
 					'desc_cambio' => 'Se Eliminó el documento',
@@ -485,15 +504,19 @@ class DocumentosController extends CI_Controller {
 			$revisionAnt = $revision.".".$this->input->post('subrevision');
 			$revisionAct = $revision.".".$subrevision;
 		}
-
+		
+		//mover los archivos a versiones obsoletas y eliminar el pdf correspondiente
 		if(file_exists('./'.self::DOCS_DIR.'/'.$this->input->post('archivo_en_servidor'))){
 			if(file_exists('./'.self::DOCS_DIR.'/Versiones obsoletas/'.date('Y'))){
 	    		rename('./'.self::DOCS_DIR.'/'.$this->input->post('archivo_en_servidor'), './'.self::DOCS_DIR.'/Versiones obsoletas/'.date('Y')."/Rev.".($revisionAnt)."-".$this->input->post('archivo_en_servidor'));
+				@unlink('./'.self::DOCS_DIR.'/'.$this->input->post('id_calidad').'.pdf');
 	    	}else{
 	    		mkdir('./'.self::DOCS_DIR.'/Versiones obsoletas/'.date('Y'));
 				rename('./'.self::DOCS_DIR.'/'.$this->input->post('archivo_en_servidor'), './'.self::DOCS_DIR.'/Versiones obsoletas/'.date('Y')."/Rev.".($revisionAnt)."-".$this->input->post('archivo_en_servidor'));
+				@unlink('./'.self::DOCS_DIR.'/'.$this->input->post('id_calidad').'.pdf');
 	    	}
 		
+			//subir el nuevo archivo
 			$file_configs['file_name'] = $this->input->post('id_calidad');
 			$file_configs['upload_path'] = './'.self::DOCS_DIR.'/';
 			$file_configs['allowed_types'] = 'xlsx|xls|pdf|docx|doc|ppt|pptx|txt';
@@ -517,11 +540,19 @@ class DocumentosController extends CI_Controller {
 					'subrevision' => $subrevision,
 					'archivo' => $uploadedData['uploaded_data_info']['file_name'],
 					'revision' => $revision,
+					'fecha_revision' => date('Y-m-d'),
+					'vista_archivo' => $this->input->post('id_calidad').'.pdf'
 				);
-
+				//generamos el pdf con libreoffice que tiene la utilidad soffice
+				//es requerimiento tener instalado libreoffice en el servidor y la utilidad headless
+				//yum install libreoffice
+				//yum install openoffice.org-headless
+				exec('soffice --headless --convert-to pdf --outdir '.$_SERVER['DOCUMENT_ROOT'].'/SGCPITIC/'.self::DOCS_DIR.'/ '.$_SERVER['DOCUMENT_ROOT'].'/SGCPITIC/'.self::DOCS_DIR.'/'.$uploadedData['uploaded_data_info']['file_name'], $output, $return);
+				
 				$datos = array(
 					'id_cambio' => null,
 					'nombre_documento' => $this->input->post('nombre_documento'),
+					'id_calidad' => $this->input->post('id_calidad'),
 					'id_documento' => $this->input->post('id_documento'),
 					'fecha_cambio' => date('Y-m-d h:m:s'),
 					'causa_cambio' => $this->input->post('causa_cambio'),
@@ -542,9 +573,7 @@ class DocumentosController extends CI_Controller {
 						//como último eliminamos el borrador que tenga sobre este documento.
 						$upload_path_borradores = './'.self::DOCS_DIR.'/borradores/'.$this->session->userdata('usuario').'/'.str_replace(' ', '_', $this->input->post('id_calidad')).'_borrador*.*';
 						$files = glob($upload_path_borradores);
-						//==print("<pre>");
-						//==print_r($files);
-						//==print("</pre>");
+
 						foreach ($files as $file) {
 							if(is_file($file)){
 								unlink($file);
@@ -846,6 +875,10 @@ class DocumentosController extends CI_Controller {
 					padding-right: 3em;
 					font-family: Arial;
 				}
+				
+				table{
+					font-family: Arial;
+				}
 
 				table{border: solid black 1px;border-collapse: collapse;}
 				td{border: solid black 1px; padding: 3px; padding-left: 5px;}
@@ -865,7 +898,7 @@ class DocumentosController extends CI_Controller {
 					<table style='margin: 0 auto; width:100%;'>
 						<tr>
 							<td>Documento:</td>
-							<td>".$datos['nombre_documento']."</td>
+							<td>".$datos['nombre_documento']." (".$datos['id_calidad'].")</td>
 						</tr>
 						<tr>
 							<td>Descripci&oacute;n del cambio:</td>
@@ -874,6 +907,9 @@ class DocumentosController extends CI_Controller {
 						<tr>
 							<td>Causa del cambio:</td>
 							<td>".$datos['causa_cambio']."</td>
+						</tr>
+						<tr>
+							<td colspan=2>Puede ver la actualizacion en el siguiente <a href='http://calidad.tpitic.com.mx/SGCPITIC/document/".$datos['id_documento']."'>link</a></td>
 						</tr>
 					</table>
 				</div><br /><br /><br />
@@ -903,25 +939,26 @@ class DocumentosController extends CI_Controller {
 		$mail->Host       = "smtp.tpitic.com.mx"; // sets the SMTP server
 		$mail->Port       = 25;                    // set the SMTP port for the GMAIL server
 		$mail->Username   = "cmburboa@tpitic.com.mx"; // SMTP account username
-		$mail->Password   = "14705782";        // SMTP account password
+		$mail->Password   = "14705783";        // SMTP account password
 
 		$mail->SetFrom('calidad@tpitic.com.mx', 'Depto. Calidad');
 		//$mail->AddReplyTo("name@yourdomain.com","First Last");
 
-		$mail->Subject    = "Notificación de Cambio para ".$datos['nombre_documento'];
+		$mail->Subject    = "Notificación de Cambio para ".$datos['nombre_documento']." (".$datos['id_calidad'].")";
 		$mail->AltBody    = "Para visualizar este correo, utilice un visor de correos compatible con HTML"; // optional, comment out and test
 		$mail->MsgHTML($body);
 
-		$usuarios = $this->DocumentosModel->searchUsersGrantsDocument($datos['id_documento']);
-		//$usuar = $usuarios->results();
-		if($usuarios){
+		$mail->AddAddress("cmburboa@tpitic.com.mx", "mburboa");
+		//$usuarios = $this->DocumentosModel->searchUsersGrantsDocument($datos['id_documento']);
+		//$usuar = $usuarios->results(); este no se descomenta
+		/*if($usuarios){
 			foreach ($usuarios->result() as $usu) {
 				$mail->AddAddress($usu->usuario."@tpitic.com.mx", $usu->nombre);
 			}
 		}else{
 			$textoNotificacionEnvío = "<br /><h4>No se envió ninguna notificación, al parecer ningún puesto tiene acceso a este documento.</h4>";
 		}
-		$mail->AddCC('cmburboa@tpitic.com.mx', 'Depto. Calidad');
+		$mail->AddCC('cmburboa@tpitic.com.mx', 'Depto. Calidad');*/
 
 		/*
 		//$mail->AddAttachment("images/phpmailer.gif");      // attachment
