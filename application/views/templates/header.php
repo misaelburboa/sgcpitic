@@ -42,7 +42,7 @@
 	</head>
 <body>
 	<header id="header">
-		<a href="./home"><img src=<?php echo base_url()."/img/pitic-logo.png"; ?> id="logoPitic" /></a>
+		<a href="<?php echo base_url()."home"; ?>"><img src=<?php echo base_url()."/img/pitic-logo.png"; ?> id="logoPitic" /></a>
 	</header>
 	<section id="contenedor">
 		<div id="contenido">

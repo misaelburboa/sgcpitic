@@ -77,6 +77,21 @@ class DocumentosModel extends CI_Model{
 			return false;
 		}
 	}
+	//mostrar los archivos con cambios en el último mes
+	function obtenerUltimosCambiosDocumentos(){
+		$this->db->select('*');
+		$this->db->from("log_cambios");
+		$this->db->where("datediff(NOW(), fecha_cambio)<30");
+		$this->db->order_by('log_cambios.id_cambio', 'desc');
+		$this->db->limit(10, 0);
+		$resultados = $this->db->get();
+		$num_results = $resultados->num_rows();
+		if($num_results > 0){
+			return $resultados;
+		}else{
+			return false;
+		}
+	}
 
 	function generadoPor($id_documento){
 		$this->db->select("nombre_documento");
@@ -191,7 +206,7 @@ class DocumentosModel extends CI_Model{
 		$checkin = array(
 			'id_documento' => $id_documento,
 			'usuario' => $this->session->userdata('usuario'),
-			'fecha' => date('Y-m-d  h:m:s'));
+			'fecha' => date('Y-m-d  G:i:s'));
 		if($this->db->insert('documentos_checkin',$checkin)){
 			return TRUE;
 		}else{

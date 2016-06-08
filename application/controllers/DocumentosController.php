@@ -14,7 +14,9 @@ class DocumentosController extends CI_Controller {
 		$this->load->library('form_validation');
 	}
 
-	public function index($pageRequested){}
+	public function index($pageRequested){
+		//$tabla = UltimosCambiosEnDocumentos();
+	}
 
 	public function nvoDocumento(){
 		if($this->session->userdata('logged_in') && ($this->session->userdata('permiso') == "W" || $this->session->userdata('permiso') == "A")){
@@ -68,7 +70,7 @@ class DocumentosController extends CI_Controller {
 					'subrevision' => '0',
 					'fecha_revision' => $this->input->post('revision'),
 					'doc_que_lo_genera' => $this->input->post('doc_que_lo_genera'),
-					'fecha_creacion' => date('Y-m-d H:m:s'),
+					'fecha_creacion' => date('Y-m-d G:i:s'),
 					'tiempo_retencion_uni' => $this->input->post('tiempo_retencion_uni'),
 					'tiempo_retencion_desc' => $this->input->post('tiempo_retencion_desc'),
 					'id_metodo_comp' => $this->input->post('metodo_compilacion'),
@@ -89,7 +91,7 @@ class DocumentosController extends CI_Controller {
 							'id_calidad' => $this->input->post('id_calidad'),
 							'nombre_documento' => $this->input->post('nombre_documento'),
 							'id_documento' => $lastDocumentID,
-							'fecha_cambio' => date('Y-m-d h:m:s'),
+							'fecha_cambio' => date('Y-m-d G:i:s'),
 							'causa_cambio' => 'Documento nuevo',
 							'desc_cambio' => 'Se creó el documento',
 							'usuario' => $this->session->userdata('usuario'),
@@ -300,7 +302,7 @@ class DocumentosController extends CI_Controller {
 					'nombre_documento' => $this->input->post('nombre_documento'),
 					'id_calidad' => $this->input->post('id_calidad'),
 					'id_documento' => $this->input->post('id_documento'),
-					'fecha_cambio' => date('Y-m-d h:m:s'),
+					'fecha_cambio' => date('Y-m-d G:i:s'),
 					'causa_cambio' => $this->input->post('causa_cambio'),
 					'desc_cambio' => $this->input->post('desc_cambio'),
 					'usuario' => $this->session->userdata('usuario'),
@@ -380,7 +382,7 @@ class DocumentosController extends CI_Controller {
 						'nombre_documento' => $this->input->post('nombre_documento'),
 						'id_documento' => $this->input->post('id_documento'),
 						'id_calidad' => $this->input->post('id_calidad'),
-						'fecha_cambio' => date('Y-m-d h:m:s'),
+						'fecha_cambio' => date('Y-m-d G:i:s'),
 						'causa_cambio' => $this->input->post('causa_cambio'),
 						'desc_cambio' => $this->input->post('desc_cambio'),
 						'usuario' => $this->session->userdata('usuario'),
@@ -446,7 +448,7 @@ class DocumentosController extends CI_Controller {
 					'nombre_documento' => $documento->nombre_documento,
 					'id_documento' => $id_documento,
 					'id_calidad' => $this->input->post('id_calidad'),
-					'fecha_cambio' => date('Y-m-d h:m:s'),
+					'fecha_cambio' => date('Y-m-d G:i:s'),
 					'causa_cambio' => 'Documento Eliminado',
 					'desc_cambio' => 'Se Eliminó el documento',
 					'usuario' => $this->session->userdata('usuario'),
@@ -554,7 +556,7 @@ class DocumentosController extends CI_Controller {
 					'nombre_documento' => $this->input->post('nombre_documento'),
 					'id_calidad' => $this->input->post('id_calidad'),
 					'id_documento' => $this->input->post('id_documento'),
-					'fecha_cambio' => date('Y-m-d h:m:s'),
+					'fecha_cambio' => date('Y-m-d G:i:s'),
 					'causa_cambio' => $this->input->post('causa_cambio'),
 					'desc_cambio' => $this->input->post('desc_cambio'),
 					'usuario' => $this->session->userdata('usuario'),
@@ -948,17 +950,16 @@ class DocumentosController extends CI_Controller {
 		$mail->AltBody    = "Para visualizar este correo, utilice un visor de correos compatible con HTML"; // optional, comment out and test
 		$mail->MsgHTML($body);
 
-		$mail->AddAddress("cmburboa@tpitic.com.mx", "mburboa");
-		//$usuarios = $this->DocumentosModel->searchUsersGrantsDocument($datos['id_documento']);
-		//$usuar = $usuarios->results(); este no se descomenta
-		/*if($usuarios){
+
+		$usuarios = $this->DocumentosModel->searchUsersGrantsDocument($datos['id_documento']);
+		if($usuarios){
 			foreach ($usuarios->result() as $usu) {
 				$mail->AddAddress($usu->usuario."@tpitic.com.mx", $usu->nombre);
 			}
 		}else{
 			$textoNotificacionEnvío = "<br /><h4>No se envió ninguna notificación, al parecer ningún puesto tiene acceso a este documento.</h4>";
 		}
-		$mail->AddCC('cmburboa@tpitic.com.mx', 'Depto. Calidad');*/
+		$mail->AddCC('cmburboa@tpitic.com.mx', 'Depto. Calidad');
 
 		/*
 		//$mail->AddAttachment("images/phpmailer.gif");      // attachment
