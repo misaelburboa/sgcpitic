@@ -7,6 +7,7 @@ class DocumentosController extends CI_Controller {
 	const DOCS_DIR = "uploads";
 	const BORRADORES = "borradores";
 	const VERS_OBSOLETAS = "Versiones obsoletas";
+	const APPNAME = "SGCPITIC";
 
 	function __construct(){
 		parent::__construct();
@@ -41,50 +42,57 @@ class DocumentosController extends CI_Controller {
 
 	public function guardarDocumento(){
 		$this->output->cache(0);
-		if($this->session->userdata('logged_in')&& ($this->session->userdata('permiso') == "W" || $this->session->userdata('permiso') == "A")){	
-			// codigo para subir el archivo al servidor
-			$file_configs['file_name'] = $this->input->post('id_calidad');
-			$file_configs['upload_path'] = './'.self::DOCS_DIR.'/';
-		    $file_configs['allowed_types'] = 'xlsx|xls|docx|doc|ppt|pptx|txt|pdf';
-		    $file_configs['max_size']    = '9999';
-		    $file_configs['max_width']  = '9999';
-		    $file_configs['max_height']  = '9999';
-		    $this->load->library('upload', $file_configs);
+		if($this->session->userdata('logged_in')&& ($this->session->userdata('permiso') == "W" || $this->session->userdata('permiso') == "A")){
+			//Creamos la validación para verificar que no exista un documento con el mismo ID de Calidad
+			$this->form_validation->set_rules('id_calidad', 'id_calidad', 'callback_checkIdCalidad');
+			//Verificamos las validaciones
+			if($this->form_validation->run() == true){
+				// codigo para subir el archivo al servidor
+				$file_configs['file_name'] = $this->input->post('id_calidad');
+				$file_configs['upload_path'] = './'.self::DOCS_DIR.'/';
+				$file_configs['allowed_types'] = 'xlsx|xls|docx|doc|ppt|pptx|txt|pdf';
+				$file_configs['max_size']    = '9999';
+				$file_configs['max_width']  = '9999';
+				$file_configs['max_height']  = '9999';
+				$this->load->library('upload', $file_configs);
 
-		    if(!$this->upload->do_upload('archivo')){
-		    	$error = array('Error' => $this->upload->display_errors());
-		    	print("El siguiente error ha ocurrido: <br /><pre>");
-		    	print_r($error);
-		    	print("</pre>");
-		    }else{
-		    	$data = array('uploaded_data_info' => $this->upload->data());
+				if(!$this->upload->do_upload('archivo')){
+					$error = array('Error' => $this->upload->display_errors());
+					print("El siguiente error ha ocurrido: <br /><pre>");
+					print_r($error);
+					print("</pre>");
+				}else{
+					$data = array('uploaded_data_info' => $this->upload->data());
+					//generamos el pdf con libreoffice que tiene la utilidad soffice
+					//es requerimiento tener instalado libreoffice en el servidor y la utilidad headless
+					//yum install libreoffice
+					//yum install openoffice.org-headless
+					exec('soffice --headless --convert-to pdf --outdir '.$_SERVER['DOCUMENT_ROOT'].'/'.self::APPNAME.'/'.self::DOCS_DIR.'/ '.$_SERVER['DOCUMENT_ROOT'].'/'.self::APPNAME.'/'.self::DOCS_DIR.'/'.$data['uploaded_data_info']['file_name'], $output, $return);
 
-			    //guardar información en base de datos
-			    //Se crea el array con la información
-			    $lastDocumentID = $this->DocumentosModel->getLastDocumentID()+1;
-				$newDocData = array(
-					'id_documento' => $lastDocumentID,
-					'nombre_documento' => $this->input->post('nombre_documento'),
-					'id_calidad' => $this->input->post('id_calidad'),
-					'revision' => $this->input->post('revision'),
-					'subrevision' => '0',
-					'fecha_revision' => $this->input->post('revision'),
-					'doc_que_lo_genera' => $this->input->post('doc_que_lo_genera'),
-					'fecha_creacion' => date('Y-m-d G:i:s'),
-					'tiempo_retencion_uni' => $this->input->post('tiempo_retencion_uni'),
-					'tiempo_retencion_desc' => $this->input->post('tiempo_retencion_desc'),
-					'id_metodo_comp' => $this->input->post('metodo_compilacion'),
-					'responsable' => $this->input->post('responsable'),
-					'id_tipo' => $this->input->post('tipo'),
-					'archivo' => $data['uploaded_data_info']['file_name'],
-					'vista_archivo' => $this->input->post('id_calidad').'.pdf',
-					'activo' => '1'
-				);
+					
+					//guardar información en base de datos
+					//Se crea el array con la información
+					$lastDocumentID = $this->DocumentosModel->getLastDocumentID()+1;
+					$newDocData = array(
+						'id_documento' => $lastDocumentID,
+						'nombre_documento' => $this->input->post('nombre_documento'),
+						'id_calidad' => $this->input->post('id_calidad'),
+						'revision' => $this->input->post('revision'),
+						'subrevision' => '0',
+						'fecha_revision' => $this->input->post('revision'),
+						'doc_que_lo_genera' => $this->input->post('doc_que_lo_genera'),
+						'fecha_creacion' => date('Y-m-d G:i:s'),
+						'tiempo_retencion_uni' => $this->input->post('tiempo_retencion_uni'),
+						'tiempo_retencion_desc' => $this->input->post('tiempo_retencion_desc'),
+						'id_metodo_comp' => $this->input->post('metodo_compilacion'),
+						'responsable' => $this->input->post('responsable'),
+						'id_tipo' => $this->input->post('tipo'),
+						'archivo' => $data['uploaded_data_info']['file_name'],
+						'vista_archivo' => $this->input->post('id_calidad').'.pdf',
+						'activo' => '1'
+					);
 
-				//Creamos la validación para verificar que no exista un documento con el mismo ID de Calidad
-				$this->form_validation->set_rules('id_calidad', 'id_calidad', 'callback_checkIdCalidad');
-				//Verificamos las validaciones
-				if($this->form_validation->run() == true){
+					//se guarda y se verifica si se guardo la información en la bd
 					if($this->DocumentosModel->addDocument($newDocData)){
 						$datos = array(
 							'id_cambio' => null,
@@ -108,14 +116,14 @@ class DocumentosController extends CI_Controller {
 						$this->load->view('documentos/guardardocumento', $data);
 						$this->load->view('templates/footer');
 					}
-				}else{
+				}
+		    }else{
 					$data['texto1'] = "Error";
 					$data['texto2'] = validation_errors();
 					$this->load->view('templates/header');			
 					$this->load->view('templates/mensaje_generico', $data);
 					$this->load->view('templates/footer');
-				}
-		    }
+			}
 		}else{
 	      //Si no hay sesión se redirecciona la página o no hay permisos;
 	     	$data['texto1'] = "Error";
@@ -374,7 +382,7 @@ class DocumentosController extends CI_Controller {
 					//es requerimiento tener instalado libreoffice en el servidor y la utilidad headless
 					//yum install libreoffice
 					//yum install openoffice.org-headless
-					exec('soffice --headless --convert-to pdf --outdir '.$_SERVER['DOCUMENT_ROOT'].'/SGCPITIC/'.self::DOCS_DIR.'/ '.$_SERVER['DOCUMENT_ROOT'].'/SGCPITIC/'.self::DOCS_DIR.'/'.$uploadedData['uploaded_data_info']['file_name'], $output, $return);
+					exec('soffice --headless --convert-to pdf --outdir '.$_SERVER['DOCUMENT_ROOT'].'/'.self::APPNAME.'/'.self::DOCS_DIR.'/ '.$_SERVER['DOCUMENT_ROOT'].'/'.self::APPNAME.'/'.self::DOCS_DIR.'/'.$uploadedData['uploaded_data_info']['file_name'], $output, $return);
 					
 					//preparamos la informacion para actualizar el log la base de datos
 					$datos = array(
@@ -549,7 +557,7 @@ class DocumentosController extends CI_Controller {
 				//es requerimiento tener instalado libreoffice en el servidor y la utilidad headless
 				//yum install libreoffice
 				//yum install openoffice.org-headless
-				exec('soffice --headless --convert-to pdf --outdir '.$_SERVER['DOCUMENT_ROOT'].'/SGCPITIC/'.self::DOCS_DIR.'/ '.$_SERVER['DOCUMENT_ROOT'].'/SGCPITIC/'.self::DOCS_DIR.'/'.$uploadedData['uploaded_data_info']['file_name'], $output, $return);
+				exec('soffice --headless --convert-to pdf --outdir '.$_SERVER['DOCUMENT_ROOT'].'/'.self::APPNAME.'/'.self::DOCS_DIR.'/ '.$_SERVER['DOCUMENT_ROOT'].'/'.self::APPNAME.'/'.self::DOCS_DIR.'/'.$uploadedData['uploaded_data_info']['file_name'], $output, $return);
 				
 				$datos = array(
 					'id_cambio' => null,
@@ -911,7 +919,7 @@ class DocumentosController extends CI_Controller {
 							<td>".$datos['causa_cambio']."</td>
 						</tr>
 						<tr>
-							<td colspan=2>Puede ver la actualizacion en el siguiente <a href='http://calidad.tpitic.com.mx/SGCPITIC/document/".$datos['id_documento']."'>link</a></td>
+							<td colspan=2>Puede ver la actualizacion en el siguiente <a href='http://calidad.tpitic.com.mx/".self::APPNAME."/document/".$datos['id_documento']."'>link</a></td>
 						</tr>
 					</table>
 				</div><br /><br /><br />
@@ -952,14 +960,15 @@ class DocumentosController extends CI_Controller {
 
 
 		$usuarios = $this->DocumentosModel->searchUsersGrantsDocument($datos['id_documento']);
-		if($usuarios){
+		/*if($usuarios){
 			foreach ($usuarios->result() as $usu) {
 				$mail->AddAddress($usu->usuario."@tpitic.com.mx", $usu->nombre);
 			}
 		}else{
 			$textoNotificacionEnvío = "<br /><h4>No se envió ninguna notificación, al parecer ningún puesto tiene acceso a este documento.</h4>";
-		}
-		$mail->AddCC('cmburboa@tpitic.com.mx', 'Depto. Calidad');
+		}*/
+		$mail->AddAddress('cmburboa@tpitic.com.mx', 'Depto. Calidad');
+		//$mail->AddCC('cmburboa@tpitic.com.mx', 'Depto. Calidad');
 
 		/*
 		//$mail->AddAttachment("images/phpmailer.gif");      // attachment

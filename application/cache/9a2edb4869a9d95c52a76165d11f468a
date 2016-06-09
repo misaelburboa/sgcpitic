@@ -1,0 +1,345 @@
+a:2:{s:6:"expire";i:1465432080;s:7:"headers";a:0:{}}ENDCI---><html>
+	<head>
+		<title>SGCPitic</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<script type="text/javascript" src=http://calidad.tpitic.com.mx/SGCPITIC/assets/bootstrap/dist/js/jquery-2.1.4.js></script>
+		<script type="text/javascript" src=http://calidad.tpitic.com.mx/SGCPITIC/assets/bootstrap/dist/js/bootstrap.min.js></script>
+		<link rel="stylesheet" type="text/css" href=http://calidad.tpitic.com.mx/SGCPITIC/assets/bootstrap/dist/css/bootstrap-theme.min.css />
+		<link rel="stylesheet" type="text/css" href=http://calidad.tpitic.com.mx/SGCPITIC/assets/bootstrap/dist/css/bootstrap.min.css />
+		<link rel="stylesheet" type="text/css" href=http://calidad.tpitic.com.mx/SGCPITIC/css/Font-Awesome/css/font-awesome.min.css />
+		<link rel="stylesheet" type="text/css" href=http://calidad.tpitic.com.mx/SGCPITIC/assets/bootstrap/dist/css/awesome-bootstrap-checkbox.css />
+		<link href='https://fonts.googleapis.com/css?family=Open+Sans:600&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+		<style type="text/css">
+			*{
+				margin:0;
+				padding: 0;
+			}
+			body{
+				font-family: 'Open Sans', sans-serif;
+			}
+			#header{
+				width: 100%;
+				z-index: 100000;
+				border-bottom:solid #ABABAB 1px;
+				padding-left: 13em;
+				background-color: #FFF;
+			}
+			#logoPitic{
+				width:10em;
+				height: 8em;
+			}
+			#contenedor{
+				padding-top: 0em;
+				min-height: 80%;
+				height: auto;
+				background-color: #FFF;
+			}
+			.btn-success{
+				background-color: #006547;
+				border-color: #006547;
+			}
+		</style>
+	</head>
+<body>
+	<header id="header">
+		<a href="http://calidad.tpitic.com.mx/SGCPITIC/home"><img src=http://calidad.tpitic.com.mx/SGCPITIC//img/pitic-logo.png id="logoPitic" /></a>
+	</header>
+	<section id="contenedor">
+		<div id="contenido"><style type="text/css">
+	th, td{
+		padding-left: 0.25em;
+		padding-right: 0.25em;
+		text-align: center;
+		font-size: 12px;
+	}
+	#contenido{
+		margin: 0 auto;
+		padding: 2em;
+		padding-top:1em;
+		width:90%;
+		height: auto;
+		min-height: 450px;
+		overflow: hidden;
+		/*border:solid gray 1px;*/
+		text-align: center;
+	}
+</style>
+	<h3>Lista de documentos registrados.</h3><div style='text-align:left'><a href='javascript:history.back(-1);'> << Volver</a></div><br /><table border=1 id="documentos" cellpadding=2 cellspacing=1 width=100%>
+<thead>
+<tr>
+<th>#</th><th>Documento</th><th>ID Calidad</th><th>Revisión</th><th>Generado por</th><th>Tiempo de Retención</th><th>Responsable</th><th>Nom. Archivo</th></tr>
+</thead>
+<tbody>
+<tr bgcolor="#B5FFB4">
+<td>1</td><td><a href='document/55'>POLITICA DE CALIDAD</a></td><td>DT-CAL-POL1</td><td>0.0</td><td>NA</td><td>0 dia(s)</td><td>Coordinador de Calidad</td><td><a href='uploads/DT-CAL-POL1.pdf'>DT-CAL-POL1</a></td></tr>
+<tr bgcolor="white">
+<td>2</td><td><a href='document/85'>ACTIVIDADES DIARIAS JEFES DE FLOTILLA</a></td><td>DT-OP-TAB14</td><td>0.0</td><td>NA</td><td>0 dia(s)</td><td>Gerente de Trafico</td><td><a href='uploads/DT-OP-TAB14.pdf'>DT-OP-TAB14</a></td></tr>
+<tr bgcolor="#B5FFB4">
+<td>3</td><td><a href='document/83'>DEFINICION DE MACROS</a></td><td>DT-OP-TAB11</td><td>1.0</td><td>NA</td><td>0 dia(s)</td><td>Coordinador de Calidad</td><td><a href='uploads/DT-OP-TAB11.pdf'>DT-OP-TAB11</a></td></tr>
+<tr bgcolor="white">
+<td>4</td><td><a href='document/110'>INSTRUCCION PARA BAJAR INFORMACION DE TRACTOS</a></td><td>DT-SOP-INS16</td><td>0.0</td><td>NA</td><td>0 dia(s)</td><td>Coordinador de Calidad</td><td><a href='uploads/DT-SOP-INS16.pdf'>DT-SOP-INS16</a></td></tr>
+<tr bgcolor="#B5FFB4">
+<td>5</td><td><a href='document/74'>HORARIO DE PERSONAL DE TRANSPORTE</a></td><td>DT-OP-TAB1</td><td>1.0</td><td>NA</td><td>0 dia(s)</td><td>Coordinador de Calidad</td><td><a href='uploads/DT-OP-TAB1.pdf'>DT-OP-TAB1</a></td></tr>
+<tr bgcolor="white">
+<td>6</td><td><a href='document/84'>CLIENTES CUENTAS NACIONALES</a></td><td>DT-SOP-TAB13</td><td>3.0</td><td>NA</td><td>0 dia(s)</td><td>Coordinador de Calidad</td><td><a href='uploads/DT-SOP-TAB13.pdf'>DT-SOP-TAB13</a></td></tr>
+<tr bgcolor="#B5FFB4">
+<td>7</td><td><a href='document/101'>CARTAS DESCRIPTIVAS DE PUESTOS</a></td><td>DT-SOP-M4</td><td>9.0</td><td>NA</td><td>0 dia(s)</td><td>Coordinador de Calidad</td><td><a href='uploads/DT-SOP-M4.pdf'>DT-SOP-M4</a></td></tr>
+<tr bgcolor="white">
+<td>8</td><td><a href='document/28'>INSTRUCCION PARA CAPACITACION DE OPERADORES</a></td><td>DT-SOP-INS6</td><td>5.0</td><td>NA</td><td>0 dia(s)</td><td>Coordinador de Calidad</td><td><a href='uploads/DT-SOP-INS6.pdf'>DT-SOP-INS6</a></td></tr>
+<tr bgcolor="#B5FFB4">
+<td>9</td><td><a href='document/105'>INSTRUCCION PARA DEPOSITOS DETALLADO</a></td><td>DT-OP-INS10</td><td>1.0</td><td>NA</td><td>0 dia(s)</td><td>Coordinador de Calidad</td><td><a href='uploads/DT-OP-INS10.pdf'>DT-OP-INS10</a></td></tr>
+<tr bgcolor="white">
+<td>10</td><td><a href='document/115'>INSTRUCCION PARA DEVOLUCIONES DE MERCANCIA</a></td><td>DT-SOP-INS20</td><td>0.0</td><td>NA</td><td>0 dia(s)</td><td>Coordinador de Calidad</td><td><a href='uploads/DT-SOP-INS20.pdf'>DT-SOP-INS20</a></td></tr>
+<tr bgcolor="#B5FFB4">
+<td>11</td><td><a href='document/5'>INSTRUCCION PARA EL CONTROL DE DOCUMENTOS EXTERNOS</a></td><td>DT-CAL-INS1</td><td>3.0</td><td>NA</td><td>0 dia(s)</td><td>Coordinador de Calidad</td><td><a href='uploads/DT-CAL-INS1.pdf'>DT-CAL-INS1</a></td></tr>
+<tr bgcolor="white">
+<td>12</td><td><a href='document/19'>INSTRUCCION PARA EL DEPOSITO DE VIATICOS A OPERADORES</a></td><td>DT-OP-INS2</td><td>5.0</td><td>NA</td><td>0 dia(s)</td><td>Coordinador de Calidad</td><td><a href='uploads/DT-OP-INS2.pdf'>DT-OP-INS2</a></td></tr>
+<tr bgcolor="#B5FFB4">
+<td>13</td><td><a href='document/21'>INSTRUCCION PARA EL MANEJO DEL SISTEMA QTRACS</a></td><td>DT-OP-INS4</td><td>3.0</td><td>NA</td><td>0 dia(s)</td><td>Coordinador de Calidad</td><td><a href='uploads/DT-OP-INS4.pdf'>DT-OP-INS4</a></td></tr>
+<tr bgcolor="white">
+<td>14</td><td><a href='document/103'>INSTRUCCION PARA EL REPORTE DE REMOLQUES</a></td><td>DT-SOP-INS8</td><td>1.0</td><td>NA</td><td>0 dia(s)</td><td>Gerente de Mantenimiento</td><td><a href='uploads/DT-SOP-INS8.pdf'>DT-SOP-INS8</a></td></tr>
+<tr bgcolor="#B5FFB4">
+<td>15</td><td><a href='document/113'>INSTRUCCION PARA ENTERARSE DE CAMBIOS</a></td><td>DT-OP-INS18</td><td>0.0</td><td>NA</td><td>0 dia(s)</td><td>Coordinador de Calidad</td><td><a href='uploads/DT-OP-INS18.pdf'>DT-OP-INS18</a></td></tr>
+<tr bgcolor="white">
+<td>16</td><td><a href='document/114'>INSTRUCCION PARA ENTREGA DE BARRAS EN ALPRO</a></td><td>DT-OP-INS19</td><td>0.0</td><td>NA</td><td>0 dia(s)</td><td>Coordinador de Calidad</td><td><a href='uploads/DT-OP-INS19.pdf'>DT-OP-INS19</a></td></tr>
+<tr bgcolor="#B5FFB4">
+<td>17</td><td><a href='document/104'>INSTRUCCION PARA ENTREGA DE EFECTIVO SIN TARJETA</a></td><td>DT-OP-INS9</td><td>1.0</td><td>NA</td><td>0 dia(s)</td><td>Coordinador de Calidad</td><td><a href='uploads/DT-OP-INS9.pdf'>DT-OP-INS9</a></td></tr>
+<tr bgcolor="white">
+<td>18</td><td><a href='document/106'>INSTRUCCION PARA ERRORES EN TRANSFERENCIAS</a></td><td>DT-OP-INS11</td><td>0.0</td><td>NA</td><td>0 dia(s)</td><td>Coordinador de Calidad</td><td><a href='uploads/DT-OP-INS11.pdf'>DT-OP-INS11</a></td></tr>
+<tr bgcolor="#B5FFB4">
+<td>19</td><td><a href='document/112'>INSTRUCCION PARA INSPECCION DE REMOLQUE Y THERMO</a></td><td>DT-SOP-INS17</td><td>0.0</td><td>NA</td><td>0 dia(s)</td><td>Coordinador de Calidad</td><td><a href='uploads/DT-SOP-INS17.pdf'>DT-SOP-INS17</a></td></tr>
+<tr bgcolor="white">
+<td>20</td><td><a href='document/23'>INSTRUCCION PARA LA ASIGNACION DE TURNOS DE VIAJES</a></td><td>DT-OP-INS5</td><td>12.0</td><td>NA</td><td>0 dia(s)</td><td>Coordinador de Calidad</td><td><a href='uploads/DT-OP-INS5.pdf'>DT-OP-INS5</a></td></tr>
+<tr bgcolor="#B5FFB4">
+<td>21</td><td><a href='document/108'>INSTRUCCION PARA REALIZAR REPORTE DE PUNTUALIDAD</a></td><td>DT-SOP-INS14</td><td>1.0</td><td>NA</td><td>0 dia(s)</td><td>Coordinador de Calidad</td><td><a href='uploads/DT-SOP-INS14.pdf'>DT-SOP-INS14</a></td></tr>
+<tr bgcolor="white">
+<td>22</td><td><a href='document/54'>INSTRUCCION PARA RECIBIR REMOLQUES EN OFICINA</a></td><td>DT-SOP-PROC50</td><td>0.0</td><td>NA</td><td>0 dia(s)</td><td>Coordinador de Calidad</td><td><a href='uploads/DT-SOP-PROC50.pdf'>DT-SOP-PROC50</a></td></tr>
+<tr bgcolor="#B5FFB4">
+<td>23</td><td><a href='document/29'>INSTRUCCION PARA REGISTRO DE STATUS DE TRACTOS</a></td><td>DT-OP-INS7</td><td>1.0</td><td>NA</td><td>0 dia(s)</td><td>Coordinador de Calidad</td><td><a href='uploads/DT-OP-INS7.pdf'>DT-OP-INS7</a></td></tr>
+<tr bgcolor="white">
+<td>24</td><td><a href='document/20'>INSTRUCCION SOAL PARA DESPACHO DE VIAJES Y ASIGNACION DE TRACTOS</a></td><td>DT-OP-INS3</td><td>2.0</td><td>NA</td><td>0 dia(s)</td><td>Coordinador de Calidad</td><td><a href='uploads/DT-OP-INS3.pdf'>DT-OP-INS3</a></td></tr>
+<tr bgcolor="#B5FFB4">
+<td>25</td><td><a href='document/87'>INSTRUCCIONES CAJEME PRODUCTOS</a></td><td>DT-OP-TAB15</td><td>0.0</td><td>NA</td><td>0 dia(s)</td><td>Coordinador de Calidad</td><td><a href='uploads/DT-OP-TAB15.pdf'>DT-OP-TAB15</a></td></tr>
+<tr bgcolor="white">
+<td>26</td><td><a href='document/93'>INSTRUCCIONES CARNES CARRANZA</a></td><td>DT-OP-TAB21</td><td>0.0</td><td>NA</td><td>0 dia(s)</td><td>Gerente de Logistica</td><td><a href='uploads/DT-OP-TAB21.pdf'>DT-OP-TAB21</a></td></tr>
+<tr bgcolor="#B5FFB4">
+<td>27</td><td><a href='document/92'>INSTRUCCIONES KOWI</a></td><td>DT-OP-TAB20</td><td>1.0</td><td>NA</td><td>0 dia(s)</td><td>Gerente de Logistica</td><td><a href='uploads/DT-OP-TAB20.pdf'>DT-OP-TAB20</a></td></tr>
+<tr bgcolor="white">
+<td>28</td><td><a href='document/95'>INSTRUCCIONES MEXPRESS (GDL)</a></td><td>DT-OP-TAB25</td><td>0.0</td><td>NA</td><td>0 dia(s)</td><td>Gerente de Logistica</td><td><a href='uploads/DT-OP-TAB25.pdf'>DT-OP-TAB25</a></td></tr>
+<tr bgcolor="#B5FFB4">
+<td>29</td><td><a href='document/96'>INSTRUCCIONES MEXPRESS (MEX)</a></td><td>DT-OP-TAB26</td><td>1.0</td><td>NA</td><td>0 dia(s)</td><td>Gerente de Logistica</td><td><a href='uploads/DT-OP-TAB26.pdf'>DT-OP-TAB26</a></td></tr>
+<tr bgcolor="white">
+<td>30</td><td><a href='document/97'>INSTRUCCIONES NESTLE</a></td><td>DT-OP-TAB29</td><td>1.0</td><td>NA</td><td>0 dia(s)</td><td>Gerente de Logistica</td><td><a href='uploads/DT-OP-TAB29.pdf'>DT-OP-TAB29</a></td></tr>
+<tr bgcolor="#B5FFB4">
+<td>31</td><td><a href='document/90'>INSTRUCCIONES NORSON</a></td><td>DT-OP-TAB18</td><td>6.0</td><td>NA</td><td>0 dia(s)</td><td>Gerente de Logistica</td><td><a href='uploads/DT-OP-TAB18.pdf'>DT-OP-TAB18</a></td></tr>
+<tr bgcolor="white">
+<td>32</td><td><a href='document/86'>INSTRUCCIONES PARA IMPRESION DE CROQUIS</a></td><td>DT-OP-TAB23</td><td>0.0</td><td>NA</td><td>0 dia(s)</td><td>Coordinador de Calidad</td><td><a href='uploads/DT-OP-TAB23.pdf'>DT-OP-TAB23</a></td></tr>
+<tr bgcolor="#B5FFB4">
+<td>33</td><td><a href='document/88'>INSTRUCCIONES RANCHO EL 17</a></td><td>DT-OP-TAB16</td><td>0.0</td><td>NA</td><td>0 dia(s)</td><td>Coordinador de Calidad</td><td><a href='uploads/DT-OP-TAB16.pdf'>DT-OP-TAB16</a></td></tr>
+<tr bgcolor="white">
+<td>34</td><td><a href='document/98'>INSTRUCCIONES PEDRO DOMECQ</a></td><td>DT-OP-TAB30</td><td>0.0</td><td>NA</td><td>0 dia(s)</td><td>Gerente de Logistica</td><td><a href='uploads/DT-OP-TAB30.pdf'>DT-OP-TAB30</a></td></tr>
+<tr bgcolor="#B5FFB4">
+<td>35</td><td><a href='document/119'>INSTRUCCIONES RESGUARDO DE MERCANCIA EN SAN EMETERIO</a></td><td>DT-OP-INS21</td><td>0.0</td><td>NA</td><td>0 dia(s)</td><td>Coordinador de Calidad</td><td><a href='uploads/DT-OP-INS21.pdf'>DT-OP-INS21</a></td></tr>
+<tr bgcolor="white">
+<td>36</td><td><a href='document/91'>INSTRUCCIONES SASA</a></td><td>DT-OP-TAB19</td><td>2.0</td><td>NA</td><td>0 dia(s)</td><td>Gerente de Logistica</td><td><a href='uploads/DT-OP-TAB19.pdf'>DT-OP-TAB19</a></td></tr>
+<tr bgcolor="#B5FFB4">
+<td>37</td><td><a href='document/94'>INSTRUCCIONES VIAJES DE MANGO</a></td><td>DT-OP-TAB22</td><td>2.0</td><td>NA</td><td>0 dia(s)</td><td>Gerente de Logistica</td><td><a href='uploads/DT-OP-TAB22.pdf'>DT-OP-TAB22</a></td></tr>
+<tr bgcolor="white">
+<td>38</td><td><a href='document/2'>MANUAL DE CALIDAD</a></td><td>DT-CAL-M1</td><td>14.0</td><td>NA</td><td>0 dia(s)</td><td>Coordinador de Calidad</td><td><a href='uploads/DT-CAL-M1.pdf'>DT-CAL-M1</a></td></tr>
+<tr bgcolor="#B5FFB4">
+<td>39</td><td><a href='document/100'>MANUAL DE PANTALLAS SOAL</a></td><td>DT-SOP-M3</td><td>1.0</td><td>NA</td><td>0 dia(s)</td><td>Coordinador de Calidad</td><td><a href='uploads/DT-SOP-M3.pdf'>DT-SOP-M3</a></td></tr>
+<tr bgcolor="white">
+<td>40</td><td><a href='document/102'>MANUAL PARA LA ELABORACION DE ORGANIGRAMAS</a></td><td>DT-SOP-M6</td><td>0.0</td><td>NA</td><td>0 dia(s)</td><td>Coordinador de Calidad</td><td><a href='uploads/DT-SOP-M6.pdf'>DT-SOP-M6</a></td></tr>
+<tr bgcolor="#B5FFB4">
+<td>41</td><td><a href='document/7'>MAPEO DE PROCESOS DE TRANSPORTACION</a></td><td>DT-CAL-MOD2</td><td>0.0</td><td>NA</td><td>0 dia(s)</td><td>Coordinador de Calidad</td><td><a href='uploads/DT-CAL-MOD2.pdf'>DT-CAL-MOD2</a></td></tr>
+<tr bgcolor="white">
+<td>42</td><td><a href='document/1'>Matriz de Carpetas Electronicas</a></td><td>DT-CAL-ISO13</td><td>0.0</td><td>NA</td><td>0 dia(s)</td><td>Coordinador de Calidad</td><td><a href='uploads/DT-CAL-ISO13.pdf'>DT-CAL-ISO13</a></td></tr>
+<tr bgcolor="#B5FFB4">
+<td>43</td><td><a href='document/4'>ORGANIGRAMA CAMION COMPLETO</a></td><td>DT-SOP-ORG1</td><td>15.0</td><td>NA</td><td>0 dia(s)</td><td>Coordinador de Calidad</td><td><a href='uploads/DT-SOP-ORG1.pdf'>DT-SOP-ORG1</a></td></tr>
+<tr bgcolor="white">
+<td>44</td><td><a href='document/99'>PERFIL DE PUESTOS</a></td><td>DT-CAL-M2</td><td>5.0</td><td>NA</td><td>0 dia(s)</td><td>Coordinador de Calidad</td><td><a href='uploads/DT-CAL-M2.pdf'>DT-CAL-M2</a></td></tr>
+<tr bgcolor="#B5FFB4">
+<td>45</td><td><a href='document/111'>PLAN DE CALIDAD</a></td><td>DT-CAL-PLAN6</td><td>2.0</td><td>NA</td><td>0 dia(s)</td><td>Coordinador de Calidad</td><td><a href='uploads/DT-CAL-PLAN6.pdf'>DT-CAL-PLAN6</a></td></tr>
+<tr bgcolor="white">
+<td>46</td><td><a href='document/124'>PLAN DE CONTINGENCIA POR PANDEMIA</a></td><td>DT-SOP-PLAN7</td><td>0.0</td><td>NA</td><td>0 dia(s)</td><td>Coordinador de Calidad</td><td><a href='uploads/DT-SOP-PLAN7.pdf'>DT-SOP-PLAN7</a></td></tr>
+<tr bgcolor="#B5FFB4">
+<td>47</td><td><a href='document/125'>PLAN DE CONTINUIDAD DEL NEGOCIO</a></td><td>DT-SOP-PLAN8</td><td>0.0</td><td>NA</td><td>0 dia(s)</td><td>Coordinador de Calidad</td><td><a href='uploads/DT-SOP-PLAN8.pdf'>DT-SOP-PLAN8</a></td></tr>
+<tr bgcolor="white">
+<td>48</td><td><a href='document/69'>PLANIFICACION DE AUDITORIAS INTERNAS AL SISTEMA DE GESTION DE CALIDAD</a></td><td>DT-CAL-PLAN1</td><td>1.0</td><td>NA</td><td>0 dia(s)</td><td>Coordinador de Calidad</td><td><a href='uploads/DT-CAL-PLAN1.pdf'>DT-CAL-PLAN1</a></td></tr>
+<tr bgcolor="#B5FFB4">
+<td>49</td><td><a href='document/73'>PLANIFICACION DE LA REALIZACION DEL SERVICIO</a></td><td>DT-CAL-PLAN5</td><td>4.0</td><td>NA</td><td>0 dia(s)</td><td>Coordinador de Calidad</td><td><a href='uploads/DT-CAL-PLAN5.pdf'>DT-CAL-PLAN5</a></td></tr>
+<tr bgcolor="white">
+<td>50</td><td><a href='document/72'>PLANIFICACION DEL DISEÑO (Servicio dedicado)</a></td><td>DT-CAL-PLAN4</td><td>4.0</td><td>NA</td><td>0 dia(s)</td><td>Coordinador de Calidad</td><td><a href='uploads/DT-CAL-PLAN4.pdf'>DT-CAL-PLAN4</a></td></tr>
+<tr bgcolor="#B5FFB4">
+<td>51</td><td><a href='document/71'>PLANIFICACION DEL SEGUIMIENTO MEDICION ANALISIS Y MEJORA</a></td><td>DT-CAL-PLAN3</td><td>1.0</td><td>NA</td><td>0 dia(s)</td><td>Coordinador de Calidad</td><td><a href='uploads/DT-CAL-PLAN3.pdf'>DT-CAL-PLAN3</a></td></tr>
+<tr bgcolor="white">
+<td>52</td><td><a href='document/70'>PLANIFICACION DEL SISTEMA DE GESTION DE LA CALIDAD</a></td><td>DT-CAL-PLAN2</td><td>1.0</td><td>NA</td><td>0 dia(s)</td><td>Coordinador de Calidad</td><td><a href='uploads/DT-CAL-PLAN2.pdf'>DT-CAL-PLAN2</a></td></tr>
+<tr bgcolor="#B5FFB4">
+<td>53</td><td><a href='document/66'>POLITICA CANDADO EN REMOLQUES</a></td><td>DT-SOP-POL12</td><td>0.0</td><td>NA</td><td>0 dia(s)</td><td>Coordinador de Calidad</td><td><a href='uploads/DT-SOP-POL12.pdf'>DT-SOP-POL12</a></td></tr>
+<tr bgcolor="white">
+<td>54</td><td><a href='document/56'>POLITICA DE ACCIDENTES</a></td><td>DT-SOP-POL2</td><td>2.0</td><td>NA</td><td>0 dia(s)</td><td>Coordinador de Calidad</td><td><a href='uploads/DT-SOP-POL2.pdf'>DT-SOP-POL2</a></td></tr>
+<tr bgcolor="#B5FFB4">
+<td>55</td><td><a href='document/68'>POLITICA DE CAPACITACION</a></td><td>DT-SOP-POL14</td><td>0.0</td><td>NA</td><td>0 dia(s)</td><td>Coordinador de Calidad</td><td><a href='uploads/DT-SOP-POL14.pdf'>DT-SOP-POL14</a></td></tr>
+<tr bgcolor="white">
+<td>56</td><td><a href='document/57'>POLITICA DE CONDUCTA</a></td><td>DT-SOP-POL3</td><td>1.0</td><td>NA</td><td>0 dia(s)</td><td>Coordinador de Calidad</td><td><a href='uploads/DT-SOP-POL3.pdf'>DT-SOP-POL3</a></td></tr>
+<tr bgcolor="#B5FFB4">
+<td>57</td><td><a href='document/65'>POLITICA DE PESO MAXIMO DE CARGA EN REMOLQUES DE PAQUETERIA</a></td><td>DT-SOP-POL11</td><td>2.0</td><td>NA</td><td>0 dia(s)</td><td>Gerente de Seguridad</td><td><a href='uploads/DT-SOP-POL11.pdf'>DT-SOP-POL11</a></td></tr>
+<tr bgcolor="white">
+<td>58</td><td><a href='document/62'>POLITICA DE SEGURIDAD</a></td><td>DT-CAL-POL8</td><td>1.0</td><td>NA</td><td>0 dia(s)</td><td>Coordinador de Calidad</td><td><a href='uploads/DT-CAL-POL8.pdf'>DT-CAL-POL8</a></td></tr>
+<tr bgcolor="#B5FFB4">
+<td>59</td><td><a href='document/67'>POLITICA PERMISO A OPERADORES</a></td><td>DT-SOP-POL13</td><td>0.0</td><td>NA</td><td>0 dia(s)</td><td>Gerente de Trafico</td><td><a href='uploads/DT-SOP-POL13.pdf'>DT-SOP-POL13</a></td></tr>
+<tr bgcolor="white">
+<td>60</td><td><a href='document/61'>POLITICAS DE PAGOS A OPERADORES</a></td><td>DT-SOP-POL7</td><td>16.0</td><td>NA</td><td>0 dia(s)</td><td>Coordinador de Calidad</td><td><a href='uploads/DT-SOP-POL7.pdf'>DT-SOP-POL7</a></td></tr>
+<tr bgcolor="#B5FFB4">
+<td>61</td><td><a href='document/64'>POLITICAS DE RECEPCION DE UNIDADES AL TALLER</a></td><td>DT-SOP-POL10</td><td>1.0</td><td>NA</td><td>0 dia(s)</td><td>Gerente de Mantenimiento</td><td><a href='uploads/DT-SOP-POL10.pdf'>DT-SOP-POL10</a></td></tr>
+<tr bgcolor="white">
+<td>62</td><td><a href='document/58'>POLITICAS DE VELOCIDAD</a></td><td>DT-SOP-POL4</td><td>3.0</td><td>NA</td><td>0 dia(s)</td><td>Coordinador de Calidad</td><td><a href='uploads/DT-SOP-POL4.pdf'>DT-SOP-POL4</a></td></tr>
+<tr bgcolor="#B5FFB4">
+<td>63</td><td><a href='document/59'>POLITICAS DIESEL</a></td><td>DT-SOP-POL5</td><td>3.0</td><td>NA</td><td>0 dia(s)</td><td>Jefe de Diesel</td><td><a href='uploads/DT-SOP-POL5.pdf'>DT-SOP-POL5</a></td></tr>
+<tr bgcolor="white">
+<td>64</td><td><a href='document/60'>POLITICAS RENDIMIENTO DIESEL</a></td><td>DT-SOP-POL6</td><td>2.0</td><td>NA</td><td>0 dia(s)</td><td>Jefe de Diesel</td><td><a href='uploads/DT-SOP-POL6.pdf'>DT-SOP-POL6</a></td></tr>
+<tr bgcolor="#B5FFB4">
+<td>65</td><td><a href='document/109'>PRE INSPECCION DE VIAJES</a></td><td>DT-OP-INS15</td><td>0.0</td><td>NA</td><td>0 dia(s)</td><td>Coordinador de Calidad</td><td><a href='uploads/DT-OP-INS15.pdf'>DT-OP-INS15</a></td></tr>
+<tr bgcolor="white">
+<td>66</td><td><a href='document/39'>PROCEDIIMENTO DE PRUEBAS PARA AUMENTO RENDIMIENTO</a></td><td>DT-SOP-PROC35</td><td>1.0</td><td>NA</td><td>0 dia(s)</td><td>Coordinador de Calidad</td><td><a href='uploads/DT-SOP-PROC35.pdf'>DT-SOP-PROC35</a></td></tr>
+<tr bgcolor="#B5FFB4">
+<td>67</td><td><a href='document/35'>PROCEDIMIENTO ASALTOS</a></td><td>DT-OP-PROC31</td><td>1.0</td><td>NA</td><td>0 dia(s)</td><td>Coordinador de Calidad</td><td><a href='uploads/DT-OP-PROC31.pdf'>DT-OP-PROC31</a></td></tr>
+<tr bgcolor="white">
+<td>68</td><td><a href='document/48'>PROCEDIMIENTO CALCULO DE GASTOS DE MANTENIMIENTO</a></td><td>DT-SOP-PROC44</td><td>1.0</td><td>NA</td><td>0 dia(s)</td><td>Gerente de Mantenimiento</td><td><a href='uploads/DT-SOP-PROC44.pdf'>DT-SOP-PROC44</a></td></tr>
+<tr bgcolor="#B5FFB4">
+<td>69</td><td><a href='document/121'>PROCEDIMIENTO CANACAR</a></td><td>DT-SOP-PROC54</td><td>0.0</td><td>NA</td><td>0 dia(s)</td><td>Coordinador de Calidad</td><td><a href='uploads/DT-SOP-PROC54.pdf'>DT-SOP-PROC54</a></td></tr>
+<tr bgcolor="white">
+<td>70</td><td><a href='document/123'>PROCEDIMIENTO CLIMA ORGANIZACIONAL</a></td><td>DT-SOP-PROC56</td><td>0.0</td><td>NA</td><td>0 dia(s)</td><td>Coordinador de Calidad</td><td><a href='uploads/DT-SOP-PROC56.pdf'>DT-SOP-PROC56</a></td></tr>
+<tr bgcolor="#B5FFB4">
+<td>71</td><td><a href='document/30'>PROCEDIMIENTO DE EQUIPO DEDICADO (Generalidades)</a></td><td>DT-OP-PROC25</td><td>5.0</td><td>NA</td><td>0 dia(s)</td><td>Coordinador de Calidad</td><td><a href='uploads/DT-OP-PROC25.pdf'>DT-OP-PROC25</a></td></tr>
+<tr bgcolor="white">
+<td>72</td><td><a href='document/43'>PROCEDIMIENTO ENTREGA DE REMOLQUES RENTADOS</a></td><td>DT-SOP-PROC39</td><td>0.0</td><td>NA</td><td>0 dia(s)</td><td>Coordinador de Calidad</td><td><a href='uploads/DT-SOP-PROC39.pdf'>DT-SOP-PROC39</a></td></tr>
+<tr bgcolor="#B5FFB4">
+<td>73</td><td><a href='document/36'>PROCEDIMIENTO DE ASCENSOS, CAMBIO DE FLOTILLA Y CAMBIO DE MANOS</a></td><td>DT-SOP-PROC32</td><td>6.0</td><td>NA</td><td>0 dia(s)</td><td>Gerente de Trafico</td><td><a href='uploads/DT-SOP-PROC32.pdf'>DT-SOP-PROC32</a></td></tr>
+<tr bgcolor="white">
+<td>74</td><td><a href='document/17'>PROCEDIMIENTO DE TRANSPORTACION</a></td><td>DT-OP-PROC14</td><td>6.0</td><td>NA</td><td>0 dia(s)</td><td>Coordinador de Calidad</td><td><a href='uploads/DT-OP-PROC14.pdf'>DT-OP-PROC14</a></td></tr>
+<tr bgcolor="#B5FFB4">
+<td>75</td><td><a href='document/41'>PROCEDIMIENTO GUARDIA LOS DOMINGOS</a></td><td>DT-OP-PROC37</td><td>0.0</td><td>NA</td><td>0 dia(s)</td><td>Coordinador de Calidad</td><td><a href='uploads/DT-OP-PROC37.pdf'>DT-OP-PROC37</a></td></tr>
+<tr bgcolor="white">
+<td>76</td><td><a href='document/9'>PROCEDIMIENTO PARA ACCIONES CORRECTIVAS</a></td><td>DT-CAL-PROC5</td><td>3.0</td><td>NA</td><td>0 dia(s)</td><td>Coordinador de Calidad</td><td><a href='uploads/DT-CAL-PROC5.pdf'>DT-CAL-PROC5</a></td></tr>
+<tr bgcolor="#B5FFB4">
+<td>77</td><td><a href='document/10'>PROCEDIMIENTO PARA ACCIONES PREVENTIVAS</a></td><td>DT-CAL-PROC6</td><td>3.0</td><td>NA</td><td>0 dia(s)</td><td>Coordinador de Calidad</td><td><a href='uploads/DT-CAL-PROC6.pdf'>DT-CAL-PROC6</a></td></tr>
+<tr bgcolor="white">
+<td>78</td><td><a href='document/42'>PROCEDIMIENTO PARA ASEGURAR LA RECUPERACION DE GUIAS DE EMBARQUES DE CAMION COMPLETO</a></td><td>DT-SOP-PROC38</td><td>0.0</td><td>NA</td><td>0 dia(s)</td><td>Coordinador de Calidad</td><td><a href='uploads/DT-SOP-PROC38.pdf'>DT-SOP-PROC38</a></td></tr>
+<tr bgcolor="#B5FFB4">
+<td>79</td><td><a href='document/26'>PROCEDIMIENTO PARA ATENCION DE QUEJAS DE CLIENTES</a></td><td>DT-CAL-PROC20</td><td>8.0</td><td>NA</td><td>0 dia(s)</td><td>Coordinador de Calidad</td><td><a href='uploads/DT-CAL-PROC20.pdf'>DT-CAL-PROC20</a></td></tr>
+<tr bgcolor="white">
+<td>80</td><td><a href='document/6'>PROCEDIMIENTO PARA AUDITORIAS INTERNAS DE CALIDAD</a></td><td>DT-CAL-PROC4</td><td>5.0</td><td>NA</td><td>0 dia(s)</td><td>Coordinador de Calidad</td><td><a href='uploads/DT-CAL-PROC4.pdf'>DT-CAL-PROC4</a></td></tr>
+<tr bgcolor="#B5FFB4">
+<td>81</td><td><a href='document/40'>PROCEDIMIENTO PARA BOTON DE PANICO</a></td><td>DT-SOP-PROC36</td><td>1.0</td><td>NA</td><td>0 dia(s)</td><td>Auxiliar de Calidad</td><td><a href='uploads/DT-SOP-PROC36.pdf'>DT-SOP-PROC36</a></td></tr>
+<tr bgcolor="white">
+<td>82</td><td><a href='document/53'>PROCEDIMIENTO PARA CAMBIOS DE ANTENA</a></td><td>DT-SOP-PROC49</td><td>0.0</td><td>NA</td><td>0 dia(s)</td><td>Coordinador de Calidad</td><td><a href='uploads/DT-SOP-PROC49.pdf'>DT-SOP-PROC49</a></td></tr>
+<tr bgcolor="#B5FFB4">
+<td>83</td><td><a href='document/44'>PROCEDIMIENTO PARA CONTROL DE CIRCUITOS</a></td><td>DT-SOP-PROC40</td><td>4.0</td><td>NA</td><td>0 dia(s)</td><td>Coordinador de Calidad</td><td><a href='uploads/DT-SOP-PROC40.pdf'>DT-SOP-PROC40</a></td></tr>
+<tr bgcolor="white">
+<td>84</td><td><a href='document/45'>PROCEDIMIENTO PARA CONTROL DE LLANTAS</a></td><td>DT-SOP-PROC41</td><td>0.0</td><td>NA</td><td>0 dia(s)</td><td>Coordinador de Calidad</td><td><a href='uploads/DT-SOP-PROC41.pdf'>DT-SOP-PROC41</a></td></tr>
+<tr bgcolor="#B5FFB4">
+<td>85</td><td><a href='document/16'>PROCEDIMIENTO PARA CONTROL DE REGISTROS DE CALIDAD</a></td><td>DT-CAL-PROC2</td><td>5.0</td><td>NA</td><td>0 dia(s)</td><td>Coordinador de Calidad</td><td><a href='uploads/DT-CAL-PROC2.pdf'>DT-CAL-PROC2</a></td></tr>
+<tr bgcolor="white">
+<td>86</td><td><a href='document/118'>PROCEDIMIENTO PARA DAR FONACOT</a></td><td>DT-SOP-PROC52</td><td>0.0</td><td>NA</td><td>0 dia(s)</td><td>Coordinador de Calidad</td><td><a href='uploads/DT-SOP-PROC52.pdf'>DT-SOP-PROC52</a></td></tr>
+<tr bgcolor="#B5FFB4">
+<td>87</td><td><a href='document/117'>PROCEDIMIENTO PARA DETERMINAR DEMORAS Y DEMORADOS</a></td><td>DT-SOP-PROC51</td><td>0.0</td><td>NA</td><td>0 dia(s)</td><td>Coordinador de Calidad</td><td><a href='uploads/DT-SOP-PROC51.pdf'>DT-SOP-PROC51</a></td></tr>
+<tr bgcolor="white">
+<td>88</td><td><a href='document/120'>PROCEDIMIENTO PARA EL CONTROL DE DIESEL DEL THERMO PARA CARGA REFRIGERADA</a></td><td>DT-SOP-PROC53</td><td>0.0</td><td>NA</td><td>0 dia(s)</td><td>Coordinador de Calidad</td><td><a href='uploads/DT-SOP-PROC53.pdf'>DT-SOP-PROC53</a></td></tr>
+<tr bgcolor="#B5FFB4">
+<td>89</td><td><a href='document/8'>PROCEDIMIENTO PARA EL CONTROL DE DOCUMENTOS</a></td><td>DT-CAL-PROC1</td><td>7.0</td><td>NA</td><td>0 dia(s)</td><td>Coordinador de Calidad</td><td><a href='uploads/DT-CAL-PROC1.pdf'>DT-CAL-PROC1</a></td></tr>
+<tr bgcolor="white">
+<td>90</td><td><a href='document/25'>PROCEDIMIENTO PARA EL DISEÑO Y DESARROLLO</a></td><td>DT-OP-PROC19</td><td>8.0</td><td>NA</td><td>0 dia(s)</td><td>Coordinador de Calidad</td><td><a href='uploads/DT-OP-PROC19.pdf'>DT-OP-PROC19</a></td></tr>
+<tr bgcolor="#B5FFB4">
+<td>91</td><td><a href='document/24'>PROCEDIMIENTO PARA EL MANEJO DE CONTINGENCIAS</a></td><td>DT-OP-PROC18</td><td>8.0</td><td>NA</td><td>0 dia(s)</td><td>Coordinador de Calidad</td><td><a href='uploads/DT-OP-PROC18.pdf'>DT-OP-PROC18</a></td></tr>
+<tr bgcolor="white">
+<td>92</td><td><a href='document/18'>PROCEDIMIENTO PARA EL MONITOREO DE VIAJES</a></td><td>DT-OP-PROC15</td><td>8.0</td><td>NA</td><td>0 dia(s)</td><td>Coordinador de Calidad</td><td><a href='uploads/DT-OP-PROC15.pdf'>DT-OP-PROC15</a></td></tr>
+<tr bgcolor="#B5FFB4">
+<td>93</td><td><a href='document/32'>PROCEDIMIENTO PARA EVALUAR AREAS DE SOPORTE</a></td><td>DT-CAL-PROC27</td><td>2.0</td><td>NA</td><td>0 dia(s)</td><td>Coordinador de Calidad</td><td><a href='uploads/DT-CAL-PROC27.pdf'>DT-CAL-PROC27</a></td></tr>
+<tr bgcolor="white">
+<td>94</td><td><a href='document/31'>PROCEDIMIENTO PARA FALLAS MECANICAS EN CARRETERA</a></td><td>DT-OP-PROC26</td><td>1.0</td><td>NA</td><td>0 dia(s)</td><td>Coordinador de Calidad</td><td><a href='uploads/DT-OP-PROC26.pdf'>DT-OP-PROC26</a></td></tr>
+<tr bgcolor="#B5FFB4">
+<td>95</td><td><a href='document/49'>PROCEDIMIENTO PARA GUIAS PROBLEMA EN ADUANA</a></td><td>DT-SOP-PROC45</td><td>1.0</td><td>NA</td><td>0 dia(s)</td><td>Coordinador de Calidad</td><td><a href='uploads/DT-SOP-PROC45.pdf'>DT-SOP-PROC45</a></td></tr>
+<tr bgcolor="white">
+<td>96</td><td><a href='document/27'>PROCEDIMIENTO PARA HACER PROCEDIMIENTOS</a></td><td>DT-CAL-PROC22</td><td>1.0</td><td>NA</td><td>0 dia(s)</td><td>Coordinador de Calidad</td><td><a href='uploads/DT-CAL-PROC22.pdf'>DT-CAL-PROC22</a></td></tr>
+<tr bgcolor="#B5FFB4">
+<td>97</td><td><a href='document/15'>PROCEDIMIENTO PARA LA ATENCION DE SOLICITUDES DE SERVICIO</a></td><td>DT-OP-PROC13</td><td>6.0</td><td>NA</td><td>0 dia(s)</td><td>Coordinador de Calidad</td><td><a href='uploads/DT-OP-PROC13.pdf'>DT-OP-PROC13</a></td></tr>
+<tr bgcolor="white">
+<td>98</td><td><a href='document/22'>PROCEDIMIENTO PARA LA ELABORACION DE GUIAS</a></td><td>DT-OP-PROC17</td><td>2.0</td><td>NA</td><td>0 dia(s)</td><td>Coordinador de Calidad</td><td><a href='uploads/DT-OP-PROC17.pdf'>DT-OP-PROC17</a></td></tr>
+<tr bgcolor="#B5FFB4">
+<td>99</td><td><a href='document/11'>PROCEDIMIENTO PARA LA EVALUACION DE PROVEEDORES</a></td><td>DT-SOP-PROC8</td><td>4.0</td><td>NA</td><td>0 dia(s)</td><td>Coordinador de Calidad</td><td><a href='uploads/DT-SOP-PROC8.pdf'>DT-SOP-PROC8</a></td></tr>
+<tr bgcolor="white">
+<td>100</td><td><a href='document/13'>PROCEDIMIENTO PARA LA MEJORA CONTINUA</a></td><td>DT-CAL-PROC11</td><td>4.0</td><td>NA</td><td>0 dia(s)</td><td>Coordinador de Calidad</td><td><a href='uploads/DT-CAL-PROC11.pdf'>DT-CAL-PROC11</a></td></tr>
+<tr bgcolor="#B5FFB4">
+<td>101</td><td><a href='document/34'>PROCEDIMIENTO PARA LIQUIDACION DE GASTOS AUTORIZADOS</a></td><td>DT-OP-PROC30</td><td>1.0</td><td>NA</td><td>0 dia(s)</td><td>Coordinador de Calidad</td><td><a href='uploads/DT-OP-PROC30.pdf'>DT-OP-PROC30</a></td></tr>
+<tr bgcolor="white">
+<td>102</td><td><a href='document/33'>PROCEDIMIENTO PARA LIQUIDACIONES</a></td><td>DT-OP-PROC28</td><td>4.0</td><td>NA</td><td>0 dia(s)</td><td>Coordinador de Calidad</td><td><a href='uploads/DT-OP-PROC28.pdf'>DT-OP-PROC28</a></td></tr>
+<tr bgcolor="#B5FFB4">
+<td>103</td><td><a href='document/37'>PROCEDIMIENTO PARA MANTENIMIENTO PREVENTIVO DE REMOLQUES</a></td><td>DT-SOP-PROC33</td><td>0.0</td><td>NA</td><td>0 dia(s)</td><td>Auxiliar de Calidad</td><td><a href='uploads/DT-SOP-PROC33.pdf'>DT-SOP-PROC33</a></td></tr>
+<tr bgcolor="white">
+<td>104</td><td><a href='document/38'>PROCEDIMIENTO PARA MANTENIMIENTO PREVENTIVO DE TRACTOS</a></td><td>DT-SOP-PROC34</td><td>0.0</td><td>NA</td><td>0 dia(s)</td><td>Coordinador de Calidad</td><td><a href='uploads/DT-SOP-PROC34.pdf'>DT-SOP-PROC34</a></td></tr>
+<tr bgcolor="#B5FFB4">
+<td>105</td><td><a href='document/12'>PROCEDIMIENTO PARA MEDIR LA SATISFACCION DEL CLIENTE</a></td><td>DT-CAL-PROC10</td><td>5.0</td><td>NA</td><td>0 dia(s)</td><td>Coordinador de Calidad</td><td><a href='uploads/DT-CAL-PROC10.pdf'>DT-CAL-PROC10</a></td></tr>
+<tr bgcolor="white">
+<td>106</td><td><a href='document/47'>PROCEDIMIENTO PARA METER REMOLQUE AL TALLER</a></td><td>DT-SOP-PROC43</td><td>0.0</td><td>NA</td><td>0 dia(s)</td><td>Gerente de Mantenimiento</td><td><a href='uploads/DT-SOP-PROC43.pdf'>DT-SOP-PROC43</a></td></tr>
+<tr bgcolor="#B5FFB4">
+<td>107</td><td><a href='document/46'>PROCEDIMIENTO PARA METER TRACTOS AL TALLER</a></td><td>DT-SOP-PROC42</td><td>1.0</td><td>NA</td><td>0 dia(s)</td><td>Gerente de Mantenimiento</td><td><a href='uploads/DT-SOP-PROC42.pdf'>DT-SOP-PROC42</a></td></tr>
+<tr bgcolor="white">
+<td>108</td><td><a href='document/52'>PROCEDIMIENTO PARA PRUEBA DE THERMOS</a></td><td>DT-SOP-PROC48</td><td>0.0</td><td>NA</td><td>0 dia(s)</td><td>Coordinador de Calidad</td><td><a href='uploads/DT-SOP-PROC48.pdf'>DT-SOP-PROC48</a></td></tr>
+<tr bgcolor="#B5FFB4">
+<td>109</td><td><a href='document/14'>PROCEDIMIENTO PARA REVISION DEL SISTEMA POR LA DIRECCION</a></td><td>DT-CAL-PROC12</td><td>6.0</td><td>NA</td><td>0 dia(s)</td><td>Coordinador de Calidad</td><td><a href='uploads/DT-CAL-PROC12.pdf'>DT-CAL-PROC12</a></td></tr>
+<tr bgcolor="white">
+<td>110</td><td><a href='document/51'>PROCEDIMIENTO PARA TRACTOS SIN ACTUALIZACION DE POSICION</a></td><td>DT-SOP-PROC47</td><td>0.0</td><td>NA</td><td>0 dia(s)</td><td>Coordinador de Calidad</td><td><a href='uploads/DT-SOP-PROC47.pdf'>DT-SOP-PROC47</a></td></tr>
+<tr bgcolor="#B5FFB4">
+<td>111</td><td><a href='document/50'>PROCEDIMIENTO PARA VIAJES CON FERRY</a></td><td>DT-SOP-PROC46</td><td>1.0</td><td>NA</td><td>0 dia(s)</td><td>Coordinador de Calidad</td><td><a href='uploads/DT-SOP-PROC46.pdf'>DT-SOP-PROC46</a></td></tr>
+<tr bgcolor="white">
+<td>112</td><td><a href='document/122'>PROCEDIMIENTO PLANES DE ACCION</a></td><td>DT-SOP-PROC55</td><td>1.0</td><td>NA</td><td>0 dia(s)</td><td>Coordinador de Calidad</td><td><a href='uploads/DT-SOP-PROC55.pdf'>DT-SOP-PROC55</a></td></tr>
+<tr bgcolor="#B5FFB4">
+<td>113</td><td><a href='document/3'>PROCESO GRAL DE TRANSPORTACION Y PROCEDIMIENTOS OPERATIVOS QUE SE UTILIZAN</a></td><td>DT-CAL-MOD1</td><td>5.0</td><td>NA</td><td>0 dia(s)</td><td>Coordinador de Calidad</td><td><a href='uploads/DT-CAL-MOD1.pdf'>DT-CAL-MOD1</a></td></tr>
+<tr bgcolor="white">
+<td>114</td><td><a href='document/79'>PROGRAMA DE AUDITORIAS INTERNAS</a></td><td>DT-CAL-TAB7</td><td>3.0</td><td>NA</td><td>0 dia(s)</td><td>Coordinador de Calidad</td><td><a href='uploads/DT-CAL-TAB7.pdf'>DT-CAL-TAB7</a></td></tr>
+<tr bgcolor="#B5FFB4">
+<td>115</td><td><a href='document/77'>RECOMENDACIONES DE CARGA</a></td><td>DT-CAL-TAB4</td><td>2.0</td><td>NA</td><td>0 dia(s)</td><td>Coordinador de Calidad</td><td><a href='uploads/DT-CAL-TAB4.pdf'>DT-CAL-TAB4</a></td></tr>
+<tr bgcolor="white">
+<td>116</td><td><a href='document/107'>REGLAS PARA ASIGNACION DE TURNOS DE LIQUIDACIONES</a></td><td>DT-OP-INS12</td><td>0.0</td><td>NA</td><td>0 dia(s)</td><td>Coordinador de Calidad</td><td><a href='uploads/DT-OP-INS12.pdf'>DT-OP-INS12</a></td></tr>
+<tr bgcolor="#B5FFB4">
+<td>117</td><td><a href='document/80'>RELACION GASOLINERAS</a></td><td>DT-OP-TAB8</td><td>2.0</td><td>NA</td><td>0 dia(s)</td><td>Jefe de Diesel</td><td><a href='uploads/DT-OP-TAB8.pdf'>DT-OP-TAB8</a></td></tr>
+<tr bgcolor="white">
+<td>118</td><td><a href='document/63'>REQUISITOS PARA LIQUIDAR</a></td><td>DT-SOP-POL9</td><td>3.0</td><td>NA</td><td>0 dia(s)</td><td>Coordinador de Liquidaciones</td><td><a href='uploads/DT-SOP-POL9.pdf'>DT-SOP-POL9</a></td></tr>
+<tr bgcolor="#B5FFB4">
+<td>119</td><td><a href='document/76'>ROL DE COMITES</a></td><td>DT-CAL-TAB3</td><td>1.0</td><td>NA</td><td>0 dia(s)</td><td>Coordinador de Calidad</td><td><a href='uploads/DT-CAL-TAB3.pdf'>DT-CAL-TAB3</a></td></tr>
+<tr bgcolor="white">
+<td>120</td><td><a href='document/82'>TABLA DE FIRMAS AUTORIZADAS PARA SALIDAS DE TRACTOS Y REMOLQUES</a></td><td>DT-SOP-TAB10</td><td>1.0</td><td>NA</td><td>0 dia(s)</td><td>Coordinador de Calidad</td><td><a href='uploads/DT-SOP-TAB10.pdf'>DT-SOP-TAB10</a></td></tr>
+<tr bgcolor="#B5FFB4">
+<td>121</td><td><a href='document/89'>TABLA DE INSTRUCCIONES ESPECIALES DE NOGALES</a></td><td>DT-OP-TAB24</td><td>1.0</td><td>NA</td><td>0 dia(s)</td><td>Coordinador de Calidad</td><td><a href='uploads/DT-OP-TAB24.pdf'>DT-OP-TAB24</a></td></tr>
+<tr bgcolor="white">
+<td>122</td><td><a href='document/81'>TABLA DE INSTRUCCIONES ESPECIALES POR CLIENTE</a></td><td>DT-SOP-TAB9</td><td>0.0</td><td>NA</td><td>0 dia(s)</td><td>Coordinador de Calidad</td><td><a href='uploads/DT-SOP-TAB9.pdf'>DT-SOP-TAB9</a></td></tr>
+<tr bgcolor="#B5FFB4">
+<td>123</td><td><a href='document/116'>TABLA DE INSTRUCCIONES PARA EL REGRESO DE EVIDENCIAS POR EL CLIENTE</a></td><td>DT-SOP-TAB27</td><td>2.0</td><td>NA</td><td>0 dia(s)</td><td>Coordinador de Calidad</td><td><a href='uploads/DT-SOP-TAB27.pdf'>DT-SOP-TAB27</a></td></tr>
+<tr bgcolor="white">
+<td>124</td><td><a href='document/75'>TABLA DE OBJETIVOS DE CALIDAD</a></td><td>DT-CAL-TAB2</td><td>1.0</td><td>NA</td><td>0 dia(s)</td><td>Coordinador de Calidad</td><td><a href='uploads/DT-CAL-TAB2.pdf'>DT-CAL-TAB2</a></td></tr>
+<tr bgcolor="#B5FFB4">
+<td>125</td><td><a href='document/78'>TIEMPOS Y KMS POR RUTA</a></td><td>DT-OP-TAB6</td><td>4.0</td><td>NA</td><td>0 dia(s)</td><td>Coordinador de Calidad</td><td><a href='uploads/DT-OP-TAB6.pdf'>DT-OP-TAB6</a></td></tr>
+<tr bgcolor="white">
+<td>126</td><td><a href='document/126'>POLITICA DE PRESTAMOS A OPERADORES</a></td><td>DT-SOP-POL15</td><td>0.0</td><td>NA</td><td>0 dia(s)</td><td>Auxiliar de Calidad</td><td><a href='uploads/DT-SOP-POL15.pdf'>DT-SOP-POL15</a></td></tr>
+</tbody>
+</table>			</div><!--Fin del div de contenido-->
+		</section>
+		<footer id="footer" style="
+		background-color:#006547;
+		width:100%;
+		height:10%;
+		font-size:1.5em;
+		margin-top:1em;
+		">
+			<div style="
+				float:left;
+				color:white;
+				width:15em;
+				padding:0.5em;
+				">
+				Líderes en el Pacífico
+			</div>
+		</footer>
+	</body>
+</html>
