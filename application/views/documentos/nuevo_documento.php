@@ -39,7 +39,7 @@ label{
 			'title' => 'Ingresa un ID de calidad correcto',
 			'required' => 'required',
 			'onKeyUp' => 'javascript: this.value=this.value.toUpperCase();',
-			'pattern' => '^DT-(OP|SOP|CAL)-(JF|ES|MTO|INS|M|MOD|ORG|PLAN|POL|PROC|TAB|ISO)[0-9]{1,4}$'
+			'pattern' => '^DT-(OP|SOP|CAL)-(JF|ES|MTO|INS|M|MOD|ORG|PLAN|POL|PROC|TAB|DIR|ISO|RH|VTA|ATC|ST|SEG)[0-9]{1,4}$'
 			);
 		$revision = array(
 			'type' => 'number',
@@ -57,6 +57,7 @@ label{
 			'required' => 'required'
 			);
 		$doc_que_lo_genera = array(
+			'id' => 'doc_que_lo_genera',
 			'name' => 'doc_que_lo_genera',
 			'class' => 'form-control',
 			'placeholder' => 'Documento que lo genera',
@@ -71,10 +72,12 @@ label{
 			'class' => 'form-control'
 			);
 		$opt_desc_t_ret = array(
+			'id' => 'tiempo_retencion_desc',
 			'name' => 'tiempo_retencion_desc',
 			'class' => 'form-control'
 			);
 		$tiempo_retencion_uni = array(
+			'id' => 'tiempo_retencion_uni',
 			'name' => 'tiempo_retencion_uni',
 			'type' => 'number',
 			'class' => 'form-control',
@@ -87,9 +90,71 @@ label{
 			'año(s)' => 'Año(s)',
 			);
 		$metodo_compilacion = array(
+			'id' => 'metodo_compilacion',
 			'name' => 'metodo_compilacion',
 			'class' => 'form-control',
 			'required' => 'required'
+			);
+			
+		$esRegistro = array(
+			'type' => 'checkbox',
+		    'name' => 'esRegistro',
+		    'id' => 'esRegistro',
+		    'value' => 0,
+		    'class' => 'styled',
+			'onclick' => 'javascript:
+			txtAlmReg = document.getElementById(\'almacen_registro\');
+			tipo = document.getElementById(\'tipo\');
+			divTipo = document.getElementById(\'divTipo\');
+			divAlmReg = document.getElementById(\'divAlmReg\');
+			divTiempoRet = document.getElementById(\'divTiempoRet\');
+			tiempoRetUni = document.getElementById(\'tiempo_retencion_uni\');
+			tiempoRetDesc = document.getElementById(\'tiempo_retencion_desc\');
+			metComp = document.getElementById(\'metComp\');
+			metodoComp = document.getElementById(\'metodo_compilacion\');
+			docGenera = document.getElementById(\'metodo_compilacion\');
+			documentoGenera = document.getElementById(\'doc_que_lo_genera\');
+			if(divAlmReg.style.display == \'none\' && this.checked){
+				txtAlmReg.required=true;
+				tipo.disabled=true;
+				divTipo.style.display=\'none\';
+				divAlmReg.style.display = \'inline\';
+				divTiempoRet.style.display=\'block\';
+				tiempoRetUni.disabled = false;
+				tiempoRetUni.required = true;
+				tiempoRetDesc.disabled = false;
+				tiempoRetDesc.required = true;
+				metComp.style.display=\'block\';
+				metodoComp.disabled = false;
+				metodoComp.required = true;
+				docGenera.style.display=\'block\';
+				documentoGenera.disabled = false;
+			}else{
+				txtAlmReg.required=false;
+				tipo.disabled=false;
+				divTipo.style.display=\'block\';
+				divAlmReg.style.display = \'none\';
+				divTiempoRet.display = \'none\';
+				divTiempoRet.style.display=\'none\';
+				tiempoRetUni.disabled = true;
+				tiempoRetUni.required = false;
+				tiempoRetDesc.disabled = true;
+				tiempoRetDesc.required = false;
+				metComp.style.display=\'none\';
+				metodoComp.disabled = true;
+				metodoComp.required = false;
+				docGenera.style.display=\'none;\';
+				documentoGenera.disabled = true;
+			}'
+		    );
+			
+		$almacen_registro = array(
+			'name' => 'almacen_registro',
+			'id' => 'almacen_registro',
+			'maxlength' => 100,
+			'rows' => 2,
+			'cols' => 3,
+			'class' => 'form-control',
 			);
 
 		$ubicacion = array(
@@ -98,12 +163,6 @@ label{
 			'placeholder' => 'Ubicación',
 			'required' => 'required'
 			);
-		/*$responsable = array(
-			'name' => 'responsable',
-			'class' => 'form-control',
-			'placeholder' => 'Responsable',
-			'required' => 'required'
-			);*/
 
 		$archivo = array(
 			'name' => 'archivo',
@@ -112,6 +171,7 @@ label{
 			'required' => 'required'
 			);
 		$tipo = array(
+			'id' => 'tipo',
 			'name' => 'tipo',
 			'class' => 'form-control',
 			'required' => 'required'
@@ -121,6 +181,16 @@ label{
 	<div class="form-group">
 		<label for="nombre_documento">Documento:</label>
 		<?php echo form_input($nombre_documento); ?>
+	</div>
+	<div class="form-group">
+		<div class="checkbox checkbox-success" style="padding-left:20px;" >
+			<?php echo form_checkbox($esRegistro); ?>
+			<label for="esRegistro">Registro de Calidad</label>
+		</div>
+		<div id='divAlmReg' style="display:none;">
+			<label for="almacen_registro">Se almacena en:</label>
+			<?php echo form_textarea($almacen_registro);?>
+		</div>
 	</div>
 	<div class="form-group">
 		<label for="id_calidad">ID Calidad:</label>
@@ -138,7 +208,7 @@ label{
 		<label for="doc_que_lo_genera">Documento que lo genera:</label>
 		<?php echo form_dropdown($opt_doc_que_lo_genera, $documentos, 'id=doc_que_lo_genera'); ?>
 	</div>
-	<div class="form-group">
+	<div class="form-group" id="divTiempoRet" style="display:none;">
 		<label for="">Tiempo de retención:</label>
 		<div class="row">
 			<div class="col-xs-3">
@@ -150,14 +220,16 @@ label{
 		</div>
 	</div>
 	<div class="form-group">
-		<label for="metodo_compilacion">Método de compilación:</label>
-		<?php echo form_dropdown($metodo_compilacion, $metodoCompilacion, 'id=metodo_compilacion'); ?>
+		<div id='metComp' style="display:none;">
+			<label for="metodo_compilacion">Método de compilación:</label>
+			<?php echo form_dropdown($metodo_compilacion, $metodoCompilacion, 'id=metodo_compilacion'); ?>
+		</div>
 	</div>
 	<div class="form-group">
 		<label for="responsable">Responsable:</label>
 		<?php echo form_dropdown($opt_responsable, $puestos, 'id=responsable'); ?>
 	</div>
-	<div class="form-group">
+	<div class="form-group" id="divTipo">
 		<label for="tipo">Tipo:</label>
 		<?php echo form_dropdown($tipo, $tiposDeDocumento, 'id=tipo'); ?>
 	</div>

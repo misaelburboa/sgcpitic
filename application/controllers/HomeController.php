@@ -31,7 +31,7 @@ class HomeController extends CI_Controller {
 					'row_alt_start' => '<tr bgcolor="white">',
 					'row_end'             => '</tr>'
 					);
-			$this->table->set_heading(array('ID Calidad', 'Documento','Fecha Cambio', 'Causa del Cambio', 'Desc. del Cambio', 'Usuario', 'Rev. Anterior', 'Rev. Actual'));
+			$this->table->set_heading(array('ID Calidad', 'Documento','Fecha Cambio', 'Causa del Cambio', 'Desc. del Cambio', 'Usuario que actualizó', 'Rev. Anterior', 'Rev. Actual'));
 			$i=1;
 			foreach ($documentos->result() as $doc){
 				$this->table->set_template($tpl);
@@ -43,7 +43,7 @@ class HomeController extends CI_Controller {
 			$cambios .= $this->table->generate();
 			return $cambios;
 		}else{
-			return "No ha habido cambios en la documentación en los últimos 30 días";
+			return "No ha habido cambios en la documentación en los últimos 30 días que correspondan a su área.";
 		}
 	}
 

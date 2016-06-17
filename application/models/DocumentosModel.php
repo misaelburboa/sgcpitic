@@ -79,12 +79,17 @@ class DocumentosModel extends CI_Model{
 	}
 	//mostrar los archivos con cambios en el último mes
 	function obtenerUltimosCambiosDocumentos(){
-		$this->db->select('*');
+		$this->db->select('log_cambios.*');
 		$this->db->from("log_cambios");
+		$this->db->join("relacion_documento_puesto", "relacion_documento_puesto.id_documento=log_cambios.id_documento", "inner");
+		$this->db->join("puestos", "puestos.id_puesto=relacion_documento_puesto.id_puesto", "inner");
+		$this->db->join("usuarios", "usuarios.id_puesto=puestos.id_puesto", "inner");
+		$this->db->where("usuarios.usuario='".$this->session->userdata('usuario')."'");
 		$this->db->where("datediff(NOW(), fecha_cambio)<30");
 		$this->db->order_by('log_cambios.id_cambio', 'desc');
-		$this->db->limit(10, 0);
+		//$this->db->limit(10, 0);
 		$resultados = $this->db->get();
+		//echo $this->db->last_query();
 		$num_results = $resultados->num_rows();
 		if($num_results > 0){
 			return $resultados;
@@ -317,7 +322,11 @@ class DocumentosModel extends CI_Model{
 		$this->db->select("*");
 		$this->db->from("documentos");
 		$this->db->where("activo=1");
+		$this->db->where("id_tipo<>9");
+		$this->db->order_by('documentos.nombre_documento', 'asc');
+		
 		$results = $this->db->get();
+		
 		$num_results = $results->num_rows();
 		$arrDocumentos[''] = "Seleccione";
 		if($num_results > 0){
@@ -351,6 +360,7 @@ class DocumentosModel extends CI_Model{
 	public function getTipoDocumento(){
 		$this->db->select("*");
 		$this->db->from("tipo_documento");
+		//$this->db->where("id_tipo <> 9");
 		$results = $this->db->get();
 		$num_results = $results->num_rows();
 		$arrTipoDoc[''] = "Seleccione";
@@ -376,7 +386,7 @@ class DocumentosModel extends CI_Model{
 	}
 
 	public function getDocument($attr, $target){
-		$this->db->select('*');
+		$this->db->select('*, date_format(documentos.fecha_revision, \'%d-%m%-%Y\') as fecha_revision');
 		$this->db->from('documentos');
 		$this->db->where($attr."= '".$target."'");
 		$results = $this->db->get();

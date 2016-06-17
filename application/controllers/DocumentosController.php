@@ -1,6 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 //Llamado de la clase para enviar emails
+//require __DIR__ . '/vendor/autoload.php'; // carga las librerias del composer.json
 require 'assets/phpmailer/PHPMailerAutoload.php';
 
 class DocumentosController extends CI_Controller {
@@ -21,8 +22,7 @@ class DocumentosController extends CI_Controller {
 
 	public function nvoDocumento(){
 		if($this->session->userdata('logged_in') && ($this->session->userdata('permiso') == "W" || $this->session->userdata('permiso') == "A")){
-			//Permitimos la memoria cache para que al darle para atrás conseve los datos capturados
-			$this->output->cache(2);
+			//$this->output->cache(2);
 			$datos['puestos'] = $this->DocumentosModel->getPuestos();
 			$datos['documentos'] = $this->DocumentosModel->getDocumentos();
 			$datos['metodoCompilacion'] = $this->DocumentosModel->getMetodosCompilacion();
@@ -48,7 +48,13 @@ class DocumentosController extends CI_Controller {
 			//Verificamos las validaciones
 			if($this->form_validation->run() == true){
 				// codigo para subir el archivo al servidor
-				$file_configs['file_name'] = $this->input->post('id_calidad');
+				$tipo = ($this->input->post('tipo')!== null) ? $this->input->post('tipo') : 9;
+				if($tipo == 9){
+					$id_calidad = $this->input->post('id_calidad')."-R";
+				}else{
+					$id_calidad = $this->input->post('id_calidad');
+				}
+				$file_configs['file_name'] = $id_calidad;
 				$file_configs['upload_path'] = './'.self::DOCS_DIR.'/';
 				$file_configs['allowed_types'] = 'xlsx|xls|docx|doc|ppt|pptx|txt|pdf';
 				$file_configs['max_size']    = '9999';
@@ -72,26 +78,41 @@ class DocumentosController extends CI_Controller {
 					
 					//guardar información en base de datos
 					//Se crea el array con la información
+					if($this->input->post('esRegistro') == true){$esRegistro = 1;}
+					if($this->input->post('almacen_registro') != ""){
+						$se_almacena_en = $this->input->post('almacen_registro');
+					}else{
+						$se_almacena_en=null;
+					}
+					$tipo = ($this->input->post('tipo')!== null) ? $this->input->post('tipo') : 9;
+					$id_calidad = ($tipo == 9)? $this->input->post('id_calidad')."-R" : $this->input->post('id_calidad');
+					$tretencion_uni = ($this->input->post('tiempo_retencion_uni')!== null) ? $this->input->post('tiempo_retencion_uni') : null;
+					$tretencion_desc =($this->input->post('tiempo_retencion_desc')!== null) ? $this->input->post('tiempo_retencion_desc') : null;
+					$metodo_comp =($this->input->post('metodo_compilacion')!== null) ? $this->input->post('metodo_compilacion') : null;
+					
 					$lastDocumentID = $this->DocumentosModel->getLastDocumentID()+1;
 					$newDocData = array(
 						'id_documento' => $lastDocumentID,
 						'nombre_documento' => $this->input->post('nombre_documento'),
-						'id_calidad' => $this->input->post('id_calidad'),
+						'id_calidad' => $id_calidad,
 						'revision' => $this->input->post('revision'),
 						'subrevision' => '0',
-						'fecha_revision' => $this->input->post('revision'),
+						'fecha_revision' => date('Y-m-d'),
 						'doc_que_lo_genera' => $this->input->post('doc_que_lo_genera'),
 						'fecha_creacion' => date('Y-m-d G:i:s'),
-						'tiempo_retencion_uni' => $this->input->post('tiempo_retencion_uni'),
-						'tiempo_retencion_desc' => $this->input->post('tiempo_retencion_desc'),
-						'id_metodo_comp' => $this->input->post('metodo_compilacion'),
+						'tiempo_retencion_uni' => $tretencion_uni,
+						'tiempo_retencion_desc' => $tretencion_desc,
+						'id_metodo_comp' => $metodo_comp,
 						'responsable' => $this->input->post('responsable'),
-						'id_tipo' => $this->input->post('tipo'),
+						'id_tipo' => $tipo,
 						'archivo' => $data['uploaded_data_info']['file_name'],
-						'vista_archivo' => $this->input->post('id_calidad').'.pdf',
-						'activo' => '1'
+						'vista_archivo' => $id_calidad.'.pdf',
+						'activo' => '1',
+						'se_almacena_en' => $se_almacena_en
 					);
-
+					/*print("<pre>");
+					print_r($newDocData);
+					print("</pre>");*/
 					//se guarda y se verifica si se guardo la información en la bd
 					if($this->DocumentosModel->addDocument($newDocData)){
 						$datos = array(
@@ -110,11 +131,8 @@ class DocumentosController extends CI_Controller {
 						$this->DocumentosModel->asignarDocumentosAPuesto($lastDocumentID, $this->input->post('responsable'));
 						$resultLogCambios = $this->DocumentosModel->agregarAlLogdeCambios($datos);
 						$this->enviarNotificacionCambio($datos);
-
-						$this->load->view('templates/header');			
-						$this->load->view('templates/left_menu');
-						$this->load->view('documentos/guardardocumento', $data);
-						$this->load->view('templates/footer');
+						
+						header('Location: http://calidad.tpitic.com.mx/SGCPITIC/document/'.$lastDocumentID);
 					}
 				}
 		    }else{
@@ -241,7 +259,6 @@ class DocumentosController extends CI_Controller {
 	public function obtenerDocumento($id_documento){
 		if($this->session->userdata('logged_in')){
 			$documento['documento'] = $this->DocumentosModel->getDocument('id_documento', $id_documento);
-			//print_r($this->DocumentosModel->isInCheckin($id_documento));
 			$documento['checkin'] = ($this->DocumentosModel->isInCheckin($id_documento)) ? $this->DocumentosModel->isInCheckin($id_documento) : 0;
 
 			$this->load->view('templates/header');
@@ -960,13 +977,13 @@ class DocumentosController extends CI_Controller {
 
 
 		$usuarios = $this->DocumentosModel->searchUsersGrantsDocument($datos['id_documento']);
-		/*if($usuarios){
+		if($usuarios){
 			foreach ($usuarios->result() as $usu) {
 				$mail->AddAddress($usu->usuario."@tpitic.com.mx", $usu->nombre);
 			}
 		}else{
 			$textoNotificacionEnvío = "<br /><h4>No se envió ninguna notificación, al parecer ningún puesto tiene acceso a este documento.</h4>";
-		}*/
+		}
 		$mail->AddAddress('cmburboa@tpitic.com.mx', 'Depto. Calidad');
 		//$mail->AddCC('cmburboa@tpitic.com.mx', 'Depto. Calidad');
 

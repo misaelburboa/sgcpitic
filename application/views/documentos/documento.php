@@ -52,9 +52,9 @@
 		<nav class="navbar navbar-default">
 		  <div class="container-fluid">
 		    <!-- Brand and toggle get grouped for better mobile display -->
-		    <div class="navbar-header">
-		      <span style="font-size:20px;"><?php echo $doc->nombre_documento; ?></span><br />
-		      <span><?php echo "Rev. ".$doc->revision.".".$doc->subrevision."/".$doc->fecha_revision; ?></span>
+		    <div class="navbar-header" style="width:100%; text-align:center;">
+		      <span style="font-size:20px;"><?php echo $doc->nombre_documento."<br />(".$doc->id_calidad.")"; ?></span><br />
+		      <span><?php echo "Rev. ".$doc->revision.".".$doc->subrevision."/".substr($doc->fecha_revision,3); ?></span>
 		    </div>
 
 		    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -62,11 +62,12 @@
 		        <li class="dropdown">
 		          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Opciones<span class="caret"></span></a>
 		          <ul class="dropdown-menu">
-						<li><a href=<?php echo "'../uploads/".$doc->vista_archivo."'"; ?>>Descargar</a></li>
+						<li><a href=<?php echo "'../uploads/".$doc->vista_archivo."'"; ?>>Descargar PDF</a></li>
 					<?php if($permiso == "A"){ ?>
-						<li><a href=<?php echo "'../uploads/".$doc->archivo."'"; ?>>Descargar editable</a></li>
+						
 					<?php } ?>
 		          	<?php if($permiso == "W" || $permiso == "A"){ ?>
+						<li><a href=<?php echo "'../uploads/".$doc->archivo."'"; ?>>Descargar editable</a></li>
 		            	<li><a href=<?php echo "'../actualizarDoc/".$doc->id_documento."'"; ?>>Modificar</a></li>
 		            	<li><a href=<?php echo "'../historialdecambios/".$doc->id_documento."'"; ?>>Ver historial de cambios</a></li>
 		            	<?php if($permiso == "A"){ ?>
