@@ -50,7 +50,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 |		my-controller/my-method	-> my_controller/my_method
 */
 $route['default_controller'] = 'HomeController/index';
-$route['404_override'] = 'documentoscontroller/notfound';
+$route['404_override'] = 'HomeController/override_404';
 
 //SGCPitic
 $route['agregarDoc'] = 'DocumentosController/nvodocumento';

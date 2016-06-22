@@ -1,8 +1,8 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 //Llamado de la clase para enviar emails
-//require __DIR__ . '/vendor/autoload.php'; // carga las librerias del composer.json
-require 'assets/phpmailer/PHPMailerAutoload.php';
+require '/var/www/html/SGCPITIC/vendor/autoload.php'; // carga las librerias del composer.json
+//require 'assets/phpmailer/PHPMailerAutoload.php';
 
 class DocumentosController extends CI_Controller {
 	const DOCS_DIR = "uploads";
@@ -88,7 +88,12 @@ class DocumentosController extends CI_Controller {
 					$id_calidad = ($tipo == 9)? $this->input->post('id_calidad')."-R" : $this->input->post('id_calidad');
 					$tretencion_uni = ($this->input->post('tiempo_retencion_uni')!== null) ? $this->input->post('tiempo_retencion_uni') : null;
 					$tretencion_desc =($this->input->post('tiempo_retencion_desc')!== null) ? $this->input->post('tiempo_retencion_desc') : null;
-					$metodo_comp =($this->input->post('metodo_compilacion')!== null) ? $this->input->post('metodo_compilacion') : null;
+					if($this->input->post('metodo_compilacion')!== null && $this->input->post('metodo_compilacion')!=""){
+						$metodo_comp = $this->input->post('metodo_compilacion');
+					}else{
+						$metodo_comp = 18;
+					}
+					$docGenera = ($this->input->post('doc_que_lo_genera')!== null) ? $this->input->post('doc_que_lo_genera') : null;
 					
 					$lastDocumentID = $this->DocumentosModel->getLastDocumentID()+1;
 					$newDocData = array(
@@ -98,7 +103,7 @@ class DocumentosController extends CI_Controller {
 						'revision' => $this->input->post('revision'),
 						'subrevision' => '0',
 						'fecha_revision' => date('Y-m-d'),
-						'doc_que_lo_genera' => $this->input->post('doc_que_lo_genera'),
+						'doc_que_lo_genera' => $docGenera,
 						'fecha_creacion' => date('Y-m-d G:i:s'),
 						'tiempo_retencion_uni' => $tretencion_uni,
 						'tiempo_retencion_desc' => $tretencion_desc,
@@ -153,6 +158,10 @@ class DocumentosController extends CI_Controller {
 	}
 
 	public function checkIdCalidad($id_calidad){
+		$tipo = ($this->input->post('tipo')!== null) ? $this->input->post('tipo') : 9;
+		if($tipo == 9){
+			$id_calidad = $this->input->post('id_calidad')."-R";
+		}
 		$num_results = $this->DocumentosModel->getDocument('id_calidad', $id_calidad);
 		$num_docs = isset( $num_results->num_rows ) ? $num_results->num_rows : 0;
 		if($num_docs > 0){
@@ -260,11 +269,18 @@ class DocumentosController extends CI_Controller {
 		if($this->session->userdata('logged_in')){
 			$documento['documento'] = $this->DocumentosModel->getDocument('id_documento', $id_documento);
 			$documento['checkin'] = ($this->DocumentosModel->isInCheckin($id_documento)) ? $this->DocumentosModel->isInCheckin($id_documento) : 0;
-
-			$this->load->view('templates/header');
-			$this->load->view('templates/left_menu');
-			$this->load->view('documentos/documento', $documento);
-			$this->load->view('templates/footer');
+			if($documento['documento']){
+				$this->load->view('templates/header');
+				$this->load->view('templates/left_menu');
+				$this->load->view('documentos/documento', $documento);
+				$this->load->view('templates/footer');
+			}else{
+				$error['heading']='¡No encontrado!';
+				$error['message']='¡No se ha encontrado el documento solicitado!';
+				$this->load->view('templates/header');
+				$this->load->view('templates/not_found');
+				$this->load->view('templates/footer');
+			}
 		}else{
 			//Si no hay sesión se redirecciona la página;
 		    redirect('login', 'refresh');
@@ -984,8 +1000,8 @@ class DocumentosController extends CI_Controller {
 		}else{
 			$textoNotificacionEnvío = "<br /><h4>No se envió ninguna notificación, al parecer ningún puesto tiene acceso a este documento.</h4>";
 		}
-		$mail->AddAddress('cmburboa@tpitic.com.mx', 'Depto. Calidad');
-		//$mail->AddCC('cmburboa@tpitic.com.mx', 'Depto. Calidad');
+		//$mail->AddAddress('cmburboa@tpitic.com.mx', 'Depto. Calidad');
+		$mail->AddCC('cmburboa@tpitic.com.mx', 'Depto. Calidad');
 
 		/*
 		//$mail->AddAttachment("images/phpmailer.gif");      // attachment

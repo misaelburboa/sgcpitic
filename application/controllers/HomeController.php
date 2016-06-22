@@ -46,12 +46,19 @@ class HomeController extends CI_Controller {
 			return "No ha habido cambios en la documentación en los últimos 30 días que correspondan a su área.";
 		}
 	}
-
-  function logout(){
-    //destruye la variable logged_in, encargada de verificar si hay una sesión activa, osea que termina la sesión
-    $this->session->unset_userdata('logged_in');
-    session_destroy();
-    redirect('home', 'refresh');
-  }
+	function override_404(){
+		$error['heading']='¡No encontrado!';
+		$error['message']='¡No se ha encontrado el documento solicitado!';
+		$this->load->view('templates/header');
+		$this->load->view('templates/not_found');
+		$this->load->view('templates/footer');
+	}
+	
+	function logout(){
+		//destruye la variable logged_in, encargada de verificar si hay una sesión activa, osea que termina la sesión
+		$this->session->unset_userdata('logged_in');
+		session_destroy();
+		redirect('home', 'refresh');
+	}
 }
 ?>

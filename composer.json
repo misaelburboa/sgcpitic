@@ -1,15 +1,8 @@
 {
-	"description": "The CodeIgniter framework",
-	"name": "codeigniter/framework",
+	"description": "Sistema de Gestion Documental para Pitic",
+	"name": "misaelburboa/sgcpitic",
 	"type": "project",
-	"homepage": "http://codeigniter.com",
-	"license": "MIT",
-	"support": {
-		"forum": "http://forum.codeigniter.com/",
-		"wiki": "https://github.com/bcit-ci/CodeIgniter/wiki",
-		"irc": "irc://irc.freenode.net/codeigniter",
-		"source": "https://github.com/bcit-ci/CodeIgniter"
-	},
+	"homepage": "http://calidad.tpitic.com.mx",
 	"require": {
 		"php"			:	">=5.2.4",
 		"phpmailer/phpmailer"	:	"~5.2"

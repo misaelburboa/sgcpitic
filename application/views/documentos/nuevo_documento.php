@@ -39,7 +39,7 @@ label{
 			'title' => 'Ingresa un ID de calidad correcto',
 			'required' => 'required',
 			'onKeyUp' => 'javascript: this.value=this.value.toUpperCase();',
-			'pattern' => '^DT-(OP|SOP|CAL)-(JF|ES|MTO|INS|M|MOD|ORG|PLAN|POL|PROC|TAB|DIR|ISO|RH|VTA|ATC|ST|SEG)[0-9]{1,4}$'
+			'pattern' => '^DT-(OP|SOP|CAL|XX)-(JF|ES|MTO|INS|M|MOD|ORG|PLAN|POL|PROC|TAB|DIR|ISO|RH|VTA|ATC|ST|SEG|LIQ|AD|GL|DLL|XX)[0-9]{1,4}$'
 			);
 		$revision = array(
 			'type' => 'number',
@@ -82,7 +82,6 @@ label{
 			'type' => 'number',
 			'class' => 'form-control',
 			'value' => 0,
-			'required' => 'required'
 			);
 		$tiempo_retencion_desc = array(
 			'dia(s)' => 'Día(s)',
@@ -93,7 +92,6 @@ label{
 			'id' => 'metodo_compilacion',
 			'name' => 'metodo_compilacion',
 			'class' => 'form-control',
-			'required' => 'required'
 			);
 			
 		$esRegistro = array(
@@ -112,7 +110,7 @@ label{
 			tiempoRetDesc = document.getElementById(\'tiempo_retencion_desc\');
 			metComp = document.getElementById(\'metComp\');
 			metodoComp = document.getElementById(\'metodo_compilacion\');
-			docGenera = document.getElementById(\'metodo_compilacion\');
+			docGenera = document.getElementById(\'docGenera\');
 			documentoGenera = document.getElementById(\'doc_que_lo_genera\');
 			if(divAlmReg.style.display == \'none\' && this.checked){
 				txtAlmReg.required=true;
@@ -205,8 +203,10 @@ label{
 		<?php echo form_input($subrevision); ?>
 	</div>
 	<div class="form-group">
+		<div id="docGenera" style="display:none;">
 		<label for="doc_que_lo_genera">Documento que lo genera:</label>
 		<?php echo form_dropdown($opt_doc_que_lo_genera, $documentos, 'id=doc_que_lo_genera'); ?>
+		</div>
 	</div>
 	<div class="form-group" id="divTiempoRet" style="display:none;">
 		<label for="">Tiempo de retención:</label>
