@@ -18,32 +18,61 @@ class DocumentosModel extends CI_Model{
 	}
 
 	function searchDocument($target){
-		$this->db->select("documentos.*, metodos_compilacion.metodo_compilacion, DATE_FORMAT(documentos.fecha_creacion, '%d-%m-%Y') as fecha_creacion, puestos.nombre_puesto");
-		$this->db->from('documentos');
-		$this->db->join('puestos', 'documentos.responsable = puestos.id_puesto', 'inner');
-		$this->db->join('relacion_documento_puesto', 'documentos.id_documento = relacion_documento_puesto.id_documento', 'inner');
-		$this->db->join('usuarios','usuarios.id_puesto = relacion_documento_puesto.id_puesto', 'inner');
-		$this->db->join('metodos_compilacion', 'metodos_compilacion.id_metodo_comp=documentos.id_metodo_comp', 'inner');
-		$this->db->where('usuarios.usuario = \''.$this->session->userdata('usuario').'\'');
-		if(is_numeric($target)){//si es numerico buscará por el id del documento
-			$where = "documentos.activo = '1' AND (
-				documentos.nombre_documento LIKE '%".$target."%' 
-				OR documentos.id_calidad LIKE '%".$target."%' 
-				OR documentos.doc_que_lo_genera LIKE '%".$target."%' 
-				OR documentos.tiempo_retencion_uni = '".$target."' 
-				OR documentos.tiempo_retencion_desc LIKE '%".$target."%' 
-				OR documentos.responsable LIKE '%".$target."%' 
-				OR documentos.archivo LIKE '%".$target."%')";
-			$this->db->where($where);
+		//si es administrador que muestre toooodos los documentos.
+		if($this->session->userdata('permiso') == "A"){
+			$this->db->select("documentos.*, metodos_compilacion.metodo_compilacion, DATE_FORMAT(documentos.fecha_creacion, '%d-%m-%Y') as fecha_creacion, puestos.nombre_puesto");
+			$this->db->from('documentos');
+			$this->db->join('puestos', 'documentos.responsable = puestos.id_puesto', 'inner');
+			$this->db->join('metodos_compilacion', 'metodos_compilacion.id_metodo_comp=documentos.id_metodo_comp', 'inner');
+			if(is_numeric($target)){//si es numerico buscará por el id del documento
+				$where = "documentos.activo = '1' AND (
+					documentos.nombre_documento LIKE '%".$target."%' 
+					OR documentos.id_calidad LIKE '%".$target."%' 
+					OR documentos.doc_que_lo_genera LIKE '%".$target."%' 
+					OR documentos.tiempo_retencion_uni = '".$target."' 
+					OR documentos.tiempo_retencion_desc LIKE '%".$target."%' 
+					OR documentos.responsable LIKE '%".$target."%' 
+					OR documentos.archivo LIKE '%".$target."%')";
+				$this->db->where($where);
+			}else{
+				$where = "documentos.activo = '1' AND (
+					documentos.nombre_documento LIKE '%".$target."%' 
+					OR documentos.id_calidad LIKE '%".$target."%' 
+					OR documentos.doc_que_lo_genera LIKE '%".$target."%'  
+					OR documentos.tiempo_retencion_desc LIKE '%".$target."%' 
+					OR documentos.responsable LIKE '%".$target."%' 
+					OR documentos.archivo LIKE '%".$target."%')";
+				$this->db->where($where);
+			}
 		}else{
-			$where = "documentos.activo = '1' AND (
-				documentos.nombre_documento LIKE '%".$target."%' 
-				OR documentos.id_calidad LIKE '%".$target."%' 
-				OR documentos.doc_que_lo_genera LIKE '%".$target."%'  
-				OR documentos.tiempo_retencion_desc LIKE '%".$target."%' 
-				OR documentos.responsable LIKE '%".$target."%' 
-				OR documentos.archivo LIKE '%".$target."%')";
-			$this->db->where($where);
+			//Si no es usuario administrador solo le mostrará a los que tenga permiso
+			$this->db->select("documentos.*, metodos_compilacion.metodo_compilacion, DATE_FORMAT(documentos.fecha_creacion, '%d-%m-%Y') as fecha_creacion, puestos.nombre_puesto");
+			$this->db->from('documentos');
+			$this->db->join('puestos', 'documentos.responsable = puestos.id_puesto', 'inner');
+			$this->db->join('relacion_documento_puesto', 'documentos.id_documento = relacion_documento_puesto.id_documento', 'inner');
+			$this->db->join('usuarios','usuarios.id_puesto = relacion_documento_puesto.id_puesto', 'inner');
+			$this->db->join('metodos_compilacion', 'metodos_compilacion.id_metodo_comp=documentos.id_metodo_comp', 'inner');
+			$this->db->where('usuarios.usuario = \''.$this->session->userdata('usuario').'\'');
+			if(is_numeric($target)){//si es numerico buscará por el id del documento
+				$where = "documentos.activo = '1' AND (
+					documentos.nombre_documento LIKE '%".$target."%' 
+					OR documentos.id_calidad LIKE '%".$target."%' 
+					OR documentos.doc_que_lo_genera LIKE '%".$target."%' 
+					OR documentos.tiempo_retencion_uni = '".$target."' 
+					OR documentos.tiempo_retencion_desc LIKE '%".$target."%' 
+					OR documentos.responsable LIKE '%".$target."%' 
+					OR documentos.archivo LIKE '%".$target."%')";
+				$this->db->where($where);
+			}else{
+				$where = "documentos.activo = '1' AND (
+					documentos.nombre_documento LIKE '%".$target."%' 
+					OR documentos.id_calidad LIKE '%".$target."%' 
+					OR documentos.doc_que_lo_genera LIKE '%".$target."%'  
+					OR documentos.tiempo_retencion_desc LIKE '%".$target."%' 
+					OR documentos.responsable LIKE '%".$target."%' 
+					OR documentos.archivo LIKE '%".$target."%')";
+				$this->db->where($where);
+			}
 		}
 
 		$resultados = $this->db->get();
@@ -386,8 +415,13 @@ class DocumentosModel extends CI_Model{
 	}
 
 	public function getDocument($attr, $target){
-		$this->db->select('*, date_format(documentos.fecha_revision, \'%d-%m%-%Y\') as fecha_revision');
+		$this->db->select('documentos.*, date_format(documentos.fecha_revision, \'%d-%m%-%Y\') as fecha_revision');
 		$this->db->from('documentos');
+		if($this->session->userdata('permiso') != "A"){ //si es administrador no aplican estos filtros
+			$this->db->join('relacion_documento_puesto', 'documentos.id_documento = relacion_documento_puesto.id_documento', 'inner');
+			$this->db->join('usuarios','usuarios.id_puesto = relacion_documento_puesto.id_puesto', 'inner');
+			$this->db->where('usuarios.usuario = \''.$this->session->userdata('usuario').'\'');
+		}
 		$this->db->where($attr."= '".$target."'");
 		$results = $this->db->get();
 		$num_results = $results->num_rows();

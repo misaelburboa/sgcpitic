@@ -267,7 +267,7 @@ class DocumentosController extends CI_Controller {
 
 	public function obtenerDocumento($id_documento){
 		if($this->session->userdata('logged_in')){
-			$documento['documento'] = $this->DocumentosModel->getDocument('id_documento', $id_documento);
+			$documento['documento'] = $this->DocumentosModel->getDocument('documentos.id_documento', $id_documento);
 			$documento['checkin'] = ($this->DocumentosModel->isInCheckin($id_documento)) ? $this->DocumentosModel->isInCheckin($id_documento) : 0;
 			if($documento['documento']){
 				$this->load->view('templates/header');
@@ -275,10 +275,10 @@ class DocumentosController extends CI_Controller {
 				$this->load->view('documentos/documento', $documento);
 				$this->load->view('templates/footer');
 			}else{
-				$error['heading']='¡No encontrado!';
-				$error['message']='¡No se ha encontrado el documento solicitado!';
+				$datos['texto1']='¡Error!';
+				$datos['texto2']='El documento que intenta visualizar no existe, o posiblemente usted no tenga los permisos para verlo.';
 				$this->load->view('templates/header');
-				$this->load->view('templates/not_found');
+				$this->load->view('templates/mensaje_generico', $datos);
 				$this->load->view('templates/footer');
 			}
 		}else{
