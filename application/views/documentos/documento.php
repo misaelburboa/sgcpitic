@@ -12,9 +12,8 @@
 	#comentariosDocumento{text-align:left;border:solid #F2E600 1px;}
 	#documento{width:100%;}
 	#center{
-		margin-left: 25%;
-		width: 60%;
-		float: left;
+		width: 70%;
+		margin: 0 auto;
 	}
 </style>
 <div id="center" style="margin-top:1em;">
@@ -29,17 +28,17 @@
 	}else{
 		$checkinUsrs = "
 		<div id='comentariosDocumento' class='alert alert-warning' >
-			<div id='warning-icon' style='float:left;margin-right:1em;'>
+			<div id='warning-icon' style='float:right;margin-right:1em;'>
 				<img src='../img/warning-icon-hi.png' height='50px' width='50px' />
 			</div>
-			<span style='font-weight:bold;'>El documento esta <span style='color:red'>en revisión</span> por los siguientes usuarios:</span><br /><ul><p>";
+			<span style='font-weight:bold;'>El documento esta <span style='color:red'>en revisión</span> por los siguientes usuarios:</span><br /><p>";
 			foreach($checkin->result() as $chkin){
-				$checkinUsrs .= "<li><a href='../getborrador/".$chkin->usuario."/".$doc->id_documento."' title='Ver este borrador'>".$chkin->usuario."</a></li>";
+				$checkinUsrs .= "<a href='../getborrador/".$chkin->usuario."/".$doc->id_documento."' title='Ver este borrador'>".$chkin->usuario."</a><br />";
 				if($usuario === $chkin->usuario){
 					$revisando = true;
 				}
 			}
-			$checkinUsrs .= "</p></ul>
+			$checkinUsrs .= "</p><br />
 			Posiblemente cambie próximamente, tome precauciones.
 		</div>";
 		//echo "<p>".$checkinUsrs."</p>";
@@ -53,31 +52,32 @@
 		  <div class="container-fluid">
 		    <!-- Brand and toggle get grouped for better mobile display -->
 		    <div class="navbar-header" style="width:100%; text-align:center;">
-		      <span style="font-size:20px;"><?php echo $doc->nombre_documento."<br />(".$doc->id_calidad.")"; ?></span><br />
+		      <span style="font-size:18px;padding-top:1em;"><?php echo $doc->nombre_documento." (".$doc->id_calidad.")"; ?></span><br />
 		      <span><?php echo "Rev. ".$doc->revision.".".$doc->subrevision."/".substr($doc->fecha_revision,3); ?></span>
 		    </div>
 
 		    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 		      <ul class="nav navbar-nav navbar-right">
 		        <li class="dropdown">
-		          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Opciones<span class="caret"></span></a>
+		          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Opciones&nbsp;&nbsp;&nbsp;<span class='glyphicon glyphicon-option-vertical' aria-hidden='true'><!--</span><span class="caret"></span>--></a>
 		          <ul class="dropdown-menu">
-					<?php if($permiso == "A"){ ?>
-						<!--<li><a href=<?php echo "'../uploads/".$doc->vista_archivo."'"; ?>>Descargar PDF</a></li>-->
-					<?php } ?>
 		          	<?php if($permiso == "W" || $permiso == "A"){ ?>
-						<li><a href=<?php echo "'../uploads/".$doc->archivo."'"; ?>>Descargar</a></li>
-		            	<li><a href=<?php echo "'../actualizarDoc/".$doc->id_documento."'"; ?>>Modificar</a></li>
-		            	<li><a href=<?php echo "'../historialdecambios/".$doc->id_documento."'"; ?>>Ver historial de cambios</a></li>
+						<li><a href=<?php echo "'../uploads/".$doc->archivo."'"; ?>><span class='glyphicon glyphicon-download-alt' aria-hidden='true'></span>&nbsp;&nbsp;&nbsp;Descargar</a></li>
+						<?php if($permiso == "A"){ ?>
+							<li><a href=<?php echo "'../actualizarDoc/".$doc->id_documento."'"; ?>><span class='glyphicon glyphicon-pencil' aria-hidden='true'></span>&nbsp;&nbsp;&nbsp;Modificar</a></li>
+						<?php } ?>
+		            	<li><a href=<?php echo "'../historialdecambios/".$doc->id_documento."'"; ?>><span class='glyphicon glyphicon-time' aria-hidden='true'></span>&nbsp;&nbsp;&nbsp;Ver historial de cambios</a></li>
 		            	<?php if($permiso == "A"){ ?>
-		            		<li><a href=<?php echo "\"javascript:if(confirm('¿Realmente desea eliminar el documento?, después de esto ya no habrá vuelta atrás.')){location.href='../eliminarDoc/".$doc->id_documento."';}\""; ?> >Eliminar</a></li>
+		            		<li><a href=<?php echo "\"javascript:if(confirm('¿Realmente desea eliminar el documento?, después de esto ya no habrá vuelta atrás.')){location.href='../eliminarDoc/".$doc->id_documento."';}\""; ?> ><span class='glyphicon glyphicon-remove-sign' aria-hidden='true'></span>&nbsp;&nbsp;&nbsp;Eliminar</a></li>
 		            	<?php } ?>
 		            	<li role="separator" class="divider"></li>
 		            	<?php if (isset($revisando)) { //verifica si el usuario actual es uno de los que tiene el documento en checkin
-			            	echo "<li><a href='../subirborrador/".$doc->id_documento."'>Subir Borrador</a></li>";
-							echo "<li><a href='../checkoutdoc/".$doc->id_documento."'>Liberar revisi&oacute;n</a></li>";
+			            	echo "<li><a href='../subirborrador/".$doc->id_documento."'><span class='glyphicon glyphicon glyphicon-open' aria-hidden='true'></span>&nbsp;&nbsp;Subir Borrador</a></li>";
+							echo "<li><a href='../checkoutdoc/".$doc->id_documento."'><span class='glyphicon glyphicon-floppy-open' aria-hidden='true'></span>&nbsp;&nbsp;&nbsp;Liberar revisi&oacute;n</a></li>";?>
+							<li><a href=<?php echo "\"javascript:if(confirm('¿Realmente desea liberar el documento sin cambios?, se perderán todos sus borradores (en caso de haberlos)')){location.href='../liberarRevSinCambios/".$doc->id_documento."';}\""; ?> ><span class='glyphicon glyphicon-new-window' aria-hidden='true'></span>&nbsp;&nbsp;&nbsp;Liberar revision sin cambios</a></li>
+						<?php	//echo "<li><a href='javascript:if(confirm(\"¿Realmente desea Liberar la revisión sin cambios?, se perderan TODOS LOS BORRADORES QUE HAYA SUBIDO)\"){location.href=\"../liberarRevSinCambios/".$doc->id_documento."\";}'>Liberar revisi&oacute;n sin cambios</a></li>";
 						}else{
-							echo "<li><a href='../checkin/".$doc->id_documento."'>Pasar a revisi&oacute;n</a></li>";
+							echo "<li><a href='../checkin/".$doc->id_documento."'><span class='glyphicon glyphicon-floppy-save' aria-hidden='true'></span>&nbsp;&nbsp;&nbsp;Pasar a revisi&oacute;n</a></li>";
 						}?>
 		            <?php } ?>
 		            

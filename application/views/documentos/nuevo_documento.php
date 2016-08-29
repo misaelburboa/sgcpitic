@@ -1,21 +1,14 @@
 
 <style type="text/css">
-#contenido{
-	/*border:solid #ABABAB 1px;*/
-	margin: 0 auto 0 auto;
-	width:100%; 
-	font-size:10px; 
-	margin-top:2em;
-	overflow: auto;
-}
+
 #center{
-	margin-left: 20%;
-	width: 80%;
-	padding-left: 15em;
-	padding-right: 15em;
-	float: left;
-	text-align: left;
+	margin: 0 auto;
+	width: 50%;
+	padding-left:2em;
+	padding-right:2em;
+	text-align:left;
 }
+
 label{
 	font-size: 14px;
 }
@@ -64,6 +57,11 @@ label{
 			);
 		$opt_responsable = array(
 			'name' => 'responsable',
+			'class' => 'form-control',
+			'required' => 'required'
+			);
+		$opt_notificar_a = array(
+			'name' => 'notificar_a[]',
 			'class' => 'form-control',
 			'required' => 'required'
 			);
@@ -225,13 +223,18 @@ label{
 			<?php echo form_dropdown($metodo_compilacion, $metodoCompilacion, 'id=metodo_compilacion'); ?>
 		</div>
 	</div>
+	<div class="form-group" id="divTipo">
+		<label for="tipo">Tipo:</label>
+		<?php echo form_dropdown($tipo, $tiposDeDocumento, 'id=tipo'); ?>
+	</div>
 	<div class="form-group">
 		<label for="responsable">Responsable:</label>
 		<?php echo form_dropdown($opt_responsable, $puestos, 'id=responsable'); ?>
 	</div>
-	<div class="form-group" id="divTipo">
-		<label for="tipo">Tipo:</label>
-		<?php echo form_dropdown($tipo, $tiposDeDocumento, 'id=tipo'); ?>
+	<div class="form-group">
+		<label for="responsable">Notificar cambios en este documento a:</label>
+		<?php unset($puestos['']); ?>
+		<?php echo form_multiselect($opt_notificar_a, $puestos,'',"id='notificar_a'"); ?>
 	</div>
 	<div class="form-group">
 		<label for="Archivo">Subir Archivo:</label>

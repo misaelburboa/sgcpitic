@@ -13,12 +13,29 @@ class VerificarLoginController extends CI_Controller{
    		$this->form_validation->set_rules('password', 'Password', 'trim|required|callback_checkDatabase');
    		if($this->form_validation->run() == false){
 	     	//echo "Validacion de campos fallida.  Usuario redirigido a pagina de login";
-	     	$this->load->view('templates/header');
+	     	$this->load->view('templates/includes');
 	    	$this->load->view('documentos/login');
 	    	$this->load->view('templates/footer');
 	   	}else{
 	     //Go to private area
 	     redirect('home', 'refresh');
+	   }
+	}
+	
+	function verifyLoginUrl(){
+		$this->load->library('form_validation');
+		$this->form_validation->set_rules('usuario', 'Usuario', 'trim|required');
+   		$this->form_validation->set_rules('password', 'Password', 'trim|required|callback_checkDatabase');
+   		if($this->form_validation->run() == false){
+	     	//echo "Validacion de campos fallida.  Usuario redirigido a pagina de login";
+	     	$this->load->view('templates/includes');
+	     	$this->load->view('templates/navigation-bar');
+	    	$this->load->view('documentos/login');
+	    	$this->load->view('templates/footer');
+	   	}else{
+	     //Go to private area
+		 $pagina = str_replace('-','/',$this->input->post('pagReq'));
+	     redirect($pagina, 'refresh');
 	   }
 	}
 

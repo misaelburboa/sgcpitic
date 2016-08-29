@@ -2,13 +2,18 @@
 #contenido{
 	margin: 0 auto 0 auto;
 	width:100%; 
-	font-size:13px; 
+	font-size:14px; 
 	height: 500px;
 }
 #center{
-	margin-left: 20%;
-	width: 80%;
-	float: left;
+	margin: 0 auto;
+	width: 90%;
+	padding-left:2em;
+	padding-right:2em;
+	text-align:center;
+}
+td{
+
 }
 </style>
 <div id="center">
@@ -28,6 +33,14 @@
         'type' => 'submit',
         'class' => 'btn btn-default',
     );
+	
+	$externos = array(
+			'type' => 'checkbox',
+		    'name' => 'externos',
+		    'id' => 'externos',
+		    'class' => 'styled',
+			'onclick' => 'javascript:if(this.checked){this.value =1;}else{this.value=0;}'
+		    );
 ?>
 
 	<div id="contenido">
@@ -40,6 +53,10 @@
 				</button>
 			</span>
 		</div>
+		<div class="checkbox checkbox-success" style="" >
+				<?php echo form_checkbox($externos); ?>
+				<label for="externos">Buscar en documentos externos</label>
+			</div>
 		<?php echo form_close(); ?>
 	</div>
 </div>

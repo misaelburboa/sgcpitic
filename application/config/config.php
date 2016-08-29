@@ -512,3 +512,22 @@ $config['rewrite_short_tags'] = FALSE;
 | Array:		array('10.0.1.200', '192.168.5.0/24')
 */
 $config['proxy_ips'] = '';
+
+//--------------------------------------------------------------------------
+$config['app_name'] = "SGCPITIC";
+$config['versiones_obsoletas'] = "Versiones obsoletas";
+$config['docs_dir'] = "uploads";
+$config['borradores'] = "borradores";
+$config['externos'] = "uploads/externos";
+$config['dominio'] = 'http://calidad.tpitic.com.mx';
+$config['show_email'] = 'do_not_reply@tpitic.com.mx';
+$config['show_email_text'] = 'Departamento de Calidad';
+$config['system_email'] = 'cmburboa@tpitic.com.mx';
+//Los administradores también se marcan en la base datos con tipo de permiso A, 
+//pero este es el global del sistema. en caso de haber mas administradores 
+//ponerlos separados por ',' (cmburboa@tpitic.com.mx,jrosales@tpitic.com.mx,etc@dominio.com)
+$config['system_admin'] = 'cmburboa@tpitic.com.mx';
+
+
+//Database
+$config['users_table'] = "usuarios";

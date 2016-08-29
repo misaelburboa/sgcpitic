@@ -45,7 +45,7 @@
 			'class' => 'form-control',
 			'required' => 'required',
 			'placeholder' => 'Número de empleado',
-			'pattern' => '^[0-9]{1,4}$',
+			'pattern' => '^[0-9]{1,5}$',
 			'value' => '',
 			'size' => '4'
 			);
@@ -68,7 +68,7 @@
 			/*'pattern' => '^[A-Za-zÑñáéíóúÁÉÍÓÚ\s]{5,50}$',
 			'maxlength' => '50',
 			'minlength' => '5',*/
-			'id' => 'permiso'
+			'id' => 'puesto'
 			);
 		$permiso = array(
 			'name' => 'permiso',
@@ -77,6 +77,27 @@
 			'required' => 'required',
 			'id' => 'permiso',
 		    );
+		$direccion_correo  = array(
+			'name' => 'direccion_correo',
+			'class' => 'form-control',
+			'placeholder' => 'Dirección de Correo',
+			'required' => 'required',
+			'id' => 'direccion_correo',
+			'pattern' => '^[_a-z0-9-.]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3})$',
+			'value' => '@tpitic.com.mx'
+		    );
+			
+		$correo = array(
+			'name' => 'correo',
+			'class' => 'form-control',
+			'placeholder' => 'Enviar notificaciones',
+			'required' => 'required',
+			'id' => 'correo',
+		    );
+		$correos = array(
+			1 => 'Sí',
+			0 => 'No'
+		)
 	?>
 	<span style="text-align:center;"><h3>Agregar usuario al sistema:<nr /></h3></span>
 	<div class="form-group">
@@ -104,8 +125,16 @@
 		<?php echo form_dropdown($puesto, $puestos); ?>
 	</div>
 	<div class="form-group">
-		<label for="metodo_compilacion">Permiso:</label>
+		<label for="direccon_correo">Correo Electrónico:</label>
+		<?php echo form_input($direccion_correo); ?>
+	</div>
+	<div class="form-group">
+		<label for="permiso">Permiso:</label>
 		<?php echo form_dropdown($permiso, $permisos); ?>
+	</div>
+	<div class="form-group">
+		<label for="correo">Envío de correos:</label>
+		<?php echo form_dropdown($correo, $correos); ?>
 	</div>
 	<?php echo form_submit("", "Agregar Usuario", "class='btn btn-success'"); ?>
 	<?php echo form_close(); ?>

@@ -6,10 +6,8 @@
 	overflow: auto;
 	}
 #center{
-	margin-top: 1em;
-	margin-left: 25%;
+	margin: 0 auto;
 	width: 50%;
-	float: left;
 	text-align: left;
 }
 </style>

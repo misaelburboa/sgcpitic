@@ -125,7 +125,7 @@
 			'class' => 'form-control'
 			);
 	?>
-	<span style="text-align:center;"><h3>Checkout <br /> <?php echo $doc->nombre_documento; ?></h3></span>
+	<span style="text-align:center;"><h3>Liberar documento: <br /><br /> <?php echo $doc->nombre_documento; ?></h3></span>
 	<div class="form-group">
 		<?php echo form_hidden('id_documento', $doc->id_documento); ?>
 		<label for="nombre_documento">Documento:</label>

@@ -195,30 +195,9 @@ function agregarOpcion() {
 			'multiple' => 'multiple',
 			);
 		$documentos_disp = array();
-
-		$agregar = array(
-		    'name' => 'agregar',
-		    'id' => 'agregar',
-		    'value' => '<',
-		    'type' => 'button',
-		    'class' => 'form-control',
-		    'content' => '<',
-		    'onclick' => 'javascript:agregarOpcion()',
-		    'style' => 'border: solid #BDBDBD 1px;width:70px;'
-		);
-		$quitar = array(
-		    'name' => 'quitar',
-		    'id' => 'quitar',
-		    'value' => '>',
-		    'type' => 'button',
-		    'class' => 'form-control',
-		    'content' => '>',
-		    'onclick' => 'javascript:quitarOpcion()',
-		    'style' => 'border: solid #BDBDBD 1px;width:70px;'
-		);
-
 	?>
-	<a href="home">Ir al inicio</a><br /><br />
+	<button name="agregar" id="agregar" type="button" class="form-control" onclick="javascript:location.href='home'" style="width:100px;"><span class='glyphicon glyphicon-home' aria-hidden='true'></span>&nbsp;&nbsp;Inicio</button><br />
+	
 	<div class="form-group">
 		<label for="puesto">Puesto:</label>
 		<?php echo form_dropdown($puesto, $arrJobs); ?>
@@ -232,9 +211,9 @@ function agregarOpcion() {
 				</div>
 			</div>
 			<div class="col-sm-1" style="height:70%;padding:1em;margin:0;">
-					<?php echo form_button($agregar); ?>
+					<button name="agregar" id="agregar" type="button" class="form-control" onclick="javascript:agregarOpcion()" style="border: solid #BDBDBD 1px;width:70px;"><span class='glyphicon glyphicon-chevron-left' aria-hidden='true'></span></button>
 				<br />
-				<?php echo form_button($quitar); ?>
+					<button name="agregar" id="agregar" type="button" class="form-control" onclick="javascript:quitarOpcion()" style="border: solid #BDBDBD 1px;width:70px;"><span class='glyphicon glyphicon-chevron-right' aria-hidden='true'></span></button>
 
 			</div>
 			<div class="col-xs-5">

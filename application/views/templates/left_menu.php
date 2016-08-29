@@ -38,16 +38,5 @@
 	}
 </style>
 <div id="left_menu">
-	<ul style="border: solid #BDBDBD 1px;">
-		<li><a href=<?php echo base_url()."home"; ?> >Home</a></li>
-		<li><a href=<?php echo base_url()."logout" ?> >Logout</a></li>
-		<li><a href=<?php echo base_url()."buscar" ?> >Buscar Documento</a></li>
-		<?php if($this->session->userdata("permiso") == "A" || $this->session->userdata("permiso") == "W"){ ?>
-			<li><a href=<?php echo base_url()."agregarDoc" ?> >Agregar Documento</a></li>
-			<li><a href=<?php echo base_url()."buscar" ?> >Modificar Documento</a></li>
-			<li><a href="#">Eliminar Documento</a></li>
-			<li><a href=<?php echo base_url()."adduser" ?> >Alta de Usuarios</a></li>
-			<li><a href=<?php echo base_url()."jobpermits" ?> >Permiso a documentos</a></li>
-		<?php } ?>
-	</ul>
+
 </div>

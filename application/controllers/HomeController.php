@@ -12,8 +12,8 @@ class HomeController extends CI_Controller {
 		$session_data = $this->session->userdata('logged_in');
 		$data['username'] = $session_data['username'];
 		$data['tabla'] = $this->UltimosCambiosEnDocumentos();
-		$this->load->view('templates/header');
-		$this->load->view('templates/left_menu.php');
+		$this->load->view('templates/includes');
+		$this->load->view('templates/navigation-bar');
 		$this->load->view('documentos/home', $data);
 		$this->load->view('templates/footer');
     }else{
@@ -27,7 +27,11 @@ class HomeController extends CI_Controller {
 			//Se genera la tabla
 			$tpl = array (
 					'table_open' => '<table border=1 id="ultimosCambios" cellpadding=2 cellspacing=1 width=100%>',
-					'row_start'     => '<tr bgcolor="#B5FFB4">',
+					'heading_row_start'   => '<tr style="background-color: #2ecc71; font-weight:bold; color:white;">',
+					'heading_row_end'     => '</tr>',
+					'heading_cell_start'  => '<th style="text-align:center;border: 2px solid black;">',
+					'heading_cell_end'    => '</th>',
+					'row_start'     => '<tr style="background-color: #DBF6ED; align:center; padding:0.5em">',
 					'row_alt_start' => '<tr bgcolor="white">',
 					'row_end'             => '</tr>'
 					);
@@ -49,7 +53,8 @@ class HomeController extends CI_Controller {
 	function override_404(){
 		$error['heading']='¡No encontrado!';
 		$error['message']='¡No se ha encontrado el documento solicitado!';
-		$this->load->view('templates/header');
+		$this->load->view('templates/includes');
+		$this->load->view('templates/navigation-bar');
 		$this->load->view('templates/not_found');
 		$this->load->view('templates/footer');
 	}

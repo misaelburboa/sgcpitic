@@ -1,10 +1,12 @@
 <style type="text/css">
 #center{
-	margin-left: 20%;
-	width: 80%;
-	float: left;
-	padding-left:2em;
-	padding-right:2em;
+	margin: 0 auto;
+	width: 90%;
+	text-align:center;
+}
+td{
+	font-size: 12px;
+	text-align: center;
 }
 </style>
 <div id="center">

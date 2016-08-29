@@ -44,6 +44,7 @@ class DocumentosModel extends CI_Model{
 					OR documentos.archivo LIKE '%".$target."%')";
 				$this->db->where($where);
 			}
+			echo $this->db->last_query();
 		}else{
 			//Si no es usuario administrador solo le mostrará a los que tenga permiso
 			$this->db->select("documentos.*, metodos_compilacion.metodo_compilacion, DATE_FORMAT(documentos.fecha_creacion, '%d-%m-%Y') as fecha_creacion, puestos.nombre_puesto");
@@ -154,6 +155,19 @@ class DocumentosModel extends CI_Model{
 		}
 	}
 
+	function estaEnRevision($document){
+		$this->db->select('*');
+		$this->db->where('id_documento', $document);
+		$result = $this->db->get('documentos_checkin');
+		$isInCheckin = $result->num_rows();
+		
+		if($isInCheckin > 0){
+			return $result;
+		}else{
+			return false;
+		}
+	}
+	/* La comento porque no estoy seguro si se usa comentada el 17/08/2016 si después de esa fecha no hay errores eliminar
 	function isReviewingDocument($user, $document){
 		$this->db->select('*');
 		$this->db->where('usuario', $user);
@@ -166,7 +180,7 @@ class DocumentosModel extends CI_Model{
 		}else{
 			return false;
 		}
-	}
+	}*/
 
 	function actualizarDocumento($datos){
 		$this->db->where('id_documento', $datos['id_documento']);
@@ -199,7 +213,7 @@ class DocumentosModel extends CI_Model{
 
 	function searchUsersGrantsDocument($id_documento){
 		//Se ejecutará este query:
-		$this->db->select("usuarios.usuario, usuarios.nombre");
+		$this->db->select("usuarios.usuario, usuarios.nombre, usuarios.envio_correo, usuarios.correo");
 		$this->db->from("usuarios");
 		$this->db->join("relacion_documento_puesto", "usuarios.id_puesto = relacion_documento_puesto.id_puesto", "inner");
 		$this->db->join("documentos", "relacion_documento_puesto.id_documento = documentos.id_documento");
@@ -309,6 +323,15 @@ class DocumentosModel extends CI_Model{
 		$num_results = $resultados->num_rows();
 		if($num_results > 0){
 			return $resultados;
+		}else{
+			return false;
+		}
+	}
+	
+	public function eliminar_borrador($id_borr){
+		$this->db->where("id_borrador=".$id_borr);
+		if($this->db->delete('borradores')){
+			return true;
 		}else{
 			return false;
 		}
@@ -439,6 +462,57 @@ class DocumentosModel extends CI_Model{
 		if($result){
 			return true;
 		}
+	}
+	
+	public function listaDocsRevision(){
+		$this->db->select("d.id_documento, d.nombre_documento, d.id_calidad, concat(d.revision,'.',d.subrevision)as revision, count(DISTINCT c.usuario) as num_usuarios, count(b.id_documento) as num_borradores");
+		$this->db->from('documentos d');
+		$this->db->join('documentos_checkin c', 'd.id_documento=c.id_documento', 'inner');
+		$this->db->join('borradores b', 'b.id_documento = d.id_documento', 'left');
+		$this->db->group_by('d.nombre_documento');
+		$results = $this->db->get();
+		//echo $this->db->last_query();
+		$num_results = $results->num_rows();
+		if($num_results > 0){
+			return $results;
+		}else{
+			return false;
+		}
+	}
+	
+	public function historialCambiosConcentrado($inicio, $final){
+		$this->db->select("*");
+		$this->db->from('log_cambios');
+		$this->db->where("fecha_cambio BETWEEN '".$inicio."' AND '".$final."'");
+		$this->db->order_by("fecha_cambio ASC");
+		$results = $this->db->get();
+		$num_results = $results->num_rows();
+		if($num_results > 0){
+			return $results;
+		}else{
+			return false;
+		}
+	}
+	
+	public function getAdministradores(){
+		$this->db->select("u.*, p.*");
+		$this->db->from("usuarios u");
+		$this->db->join("puestos p", "u.id_puesto = p.id_puesto", "inner");
+		$this->db->where("permiso = 'A'");
+
+		$results = $this->db->get();
+		$num_results = $results->num_rows();
+		if($num_results > 0){
+			return $results;
+		}else{
+			return false;
+		}
+	}
+	
+	public function getUsers($where){
+		$this->db->select("*");
+		$this->db->from($this->config->item('users_table'));
+		//$this->db->where();
 	}
 }
 ?>

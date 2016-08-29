@@ -1,6 +1,12 @@
 <style>
 #contenido{
-		padding: 2em;
+		margin: 0 auto 0 auto;
+		width:100%; 
+		font-size:14px; 
+		overflow: auto;
+		min-height: 470px;
+	}
+#generico{
 		margin: 0 auto 0 auto;
 		width:50%; 
 		font-size:14px; 
@@ -9,10 +15,16 @@
 		min-height: 470px;
 	}
 </style>
-<span style="font-size:70px;"><?php echo $texto1; ?></span><br />
-<span style="font-size:30px;"><?php echo $texto2; ?></span><br />
-<span style="font-size:15px;">
-<hr />
-<a href="javascript:history.back(-1);" > << Pagina anterior </a>&nbsp;&nbsp;|&nbsp;&nbsp;
-<a href=<?php echo base_url()."home"; ?> > Inicio </a>
-</span><br /><br />
+<div id="generico">
+	<div style="float:left;width:20%;">
+	<button name='volver' id='volver' type='button' class='form-control' onclick='javascript:history.back(-1);' style='width:100px;'>
+		<span class='glyphicon glyphicon-chevron-left' aria-hidden='true'></span>&nbsp;&nbsp;Volver
+	</button></div>
+	<div style="float:left;width:20%;">
+	<button name="home" id="home" type="button" class="form-control" onclick="javascript:location.href='<?php echo base_url()."home"; ?>'" style="width:100px;">
+		<span class='glyphicon glyphicon-home' aria-hidden='true'></span>&nbsp;&nbsp;Inicio
+	</button></div>
+	<br /><br /><hr />
+	<span style="font-size:70px;"><?php echo $texto1; ?></span><br />
+	<span style="font-size:30px;"><?php echo $texto2; ?></span><br />
+</div>
