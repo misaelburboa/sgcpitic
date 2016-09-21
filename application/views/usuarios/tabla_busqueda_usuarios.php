@@ -18,5 +18,7 @@ tr:hover{
 if(isset($tablaUsuarios)){
 	
 	echo "<h2>Usuarios que coinciden con su b&uacute;squeda:</h2><br />".$tablaUsuarios;
+	echo $leyenda;
+	echo "<ul class='pagination'>".$paginacion."</ul>";
 }
 ?></div>

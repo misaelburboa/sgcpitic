@@ -17,7 +17,8 @@ td{
 }
 </style>
 <div id="center">
-<?php echo form_open_multipart('searchdocument'); ?>
+<form action="searchdocument" method="get">
+<?php //echo form_open_multipart('searchdocument'); ?>
 <?php
 	$target = array(
 			'name' => 'target',

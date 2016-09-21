@@ -9,9 +9,9 @@
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 		<ul class="nav navbar-nav">
-			<li class=""><a href="<?php echo base_url()."home"; ?>"><span class='glyphicon glyphicon-home' aria-hidden='true'></span>&nbsp;&nbsp;&nbsp;<span class="sr-only">(current)</span></a></li>
+			<li class=""><a href="<?php echo base_url()."home"; ?>">&nbsp;<span class='glyphicon glyphicon-home' aria-hidden='true'></span>&nbsp;<span class="sr-only">(current)</span></a></li>
 			<li class="dropdown">
-				<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class='glyphicon glyphicon-file' aria-hidden='true'></span>&nbsp;<span class="caret"></span></a>
+				<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">&nbsp;<span class='glyphicon glyphicon-file' aria-hidden='true'></span>&nbsp;<span class="caret"></span></a>
 				<ul class="dropdown-menu">
 					<li><a href=<?php echo base_url()."buscar" ?> ><span class='glyphicon glyphicon-search' aria-hidden='true'></span>&nbsp;&nbsp;&nbsp;Buscar Documento</a></li>
 					<?php if($_SESSION["permiso"] == "A"){ ?>
@@ -36,7 +36,7 @@
 				</ul>
 			</li>
 		</ul>
-		<form class="navbar-form navbar-left" action="<?php echo base_url()."searchdocument" ?>" method="post">
+		<form class="navbar-form navbar-left" action="<?php echo base_url()."searchdocument" ?>" method="get">
 			<div class="form-group">
 			  <input id="target" name="target" type="text" class="form-control" style="width:400px;" placeholder="Búsqueda de DOCUMENTOS">
 			</div>
@@ -49,7 +49,7 @@
 			<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class='glyphicon glyphicon-user' aria-hidden='true'></span>&nbsp;<?php echo $_SESSION["usuario"]; ?><span class="caret"></span></a>
 			<ul class="dropdown-menu">
 				<li><a href=<?php echo base_url()."logout" ?> ><span class='glyphicon glyphicon-log-out' aria-hidden='true'></span>&nbsp; Cerrar Sesión</a></li>
-
+				<li><a href=<?php echo base_url()."ajustesCuenta/ajustes_usuario" ?> ><span class='glyphicon glyphicon-cog' aria-hidden='true'></span>&nbsp; Ajustes de la cuenta</a></li>
 			</ul>
 			</li>
 		</ul>

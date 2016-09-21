@@ -25,6 +25,7 @@
 		<span class='glyphicon glyphicon-home' aria-hidden='true'></span>&nbsp;&nbsp;Inicio
 	</button></div>
 	<br /><br /><hr />
-	<span style="font-size:70px;"><?php echo $texto1; ?></span><br />
-	<span style="font-size:30px;"><?php echo $texto2; ?></span><br />
+	<div class="page-header">
+	  <h1><span style="font-size:70px"><?php echo $texto1; ?></span><br /><small><?php echo $texto2; ?></span></small></h1>
+	</div>	
 </div>

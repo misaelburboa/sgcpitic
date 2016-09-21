@@ -8,6 +8,7 @@ class DocumentosController extends CI_Controller {
 		parent::__construct();
 		$this->load->model('DocumentosModel');
 		$this->load->model('DocumentosExternosModel');
+		$this->load->library('pagination');
 		$this->load->library('form_validation');
 		$this->load->library('email');
 	}
@@ -219,9 +220,9 @@ class DocumentosController extends CI_Controller {
 
 	public function buscarDocumento(){
 		if($this->session->userdata('logged_in')){
-			$this->output->cache(1);
-			$externos = $this->input->post('externos');
-			$datos['target'] = $this->input->post('target');
+			//$this->output->cache(1);
+			$externos = $this->input->get('externos');
+			$datos['target'] = $this->input->get('target');
 			if($externos == 1){
 				if(trim($datos['target']) == ""){
 					$datos['mensaje'] = "Por favor específique el texto a buscar.<br />Si desea ver todos los documentos escriba un asterisco ( * )";

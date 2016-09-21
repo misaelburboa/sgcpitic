@@ -185,7 +185,56 @@ WHERE e.id_puesto = ".$id_puesto.") AND a.activo = 1 order by a.nombre_documento
 		}
 	}
 	
-	public function getUsers($POST){
+	public function getUsers($POST, $limit, $start){
+		$query = "SELECT u.*, p.*, per.*, CASE u.envio_correo WHEN 1 THEN 'SI' ELSE 'NO' END as notificaciones FROM usuarios u INNER JOIN puestos p ON u.id_puesto=p.id_puesto INNER JOIN cat_permisos per ON u.permiso=per.clave_permiso ";
+		$this->db->query($query);
+		$where = "";
+		if($POST['target'] != ""){
+			$where = "WHERE(nombre like '%".$POST['target']."%' OR
+			u.usuario like '%".$POST['target']."%' OR 
+			u.correo like '%".$POST['target']."%' OR 
+			u.no_empleado like '%".$POST['target']."%')";
+			if($POST['puesto'] != ""){
+				$where.= " AND u.id_puesto = '".$POST['puesto']."'";
+			}
+			if($POST['permiso']!= ""){
+				$where.= " AND u.permiso = '".$POST['permiso']."'";
+			}
+			if(isset($POST['notificaciones'])){
+				$where.= " AND u.envio_correo = '".$POST['notificaciones']."'";
+			}
+		}elseif($POST['puesto'] != ""){
+			$where.= " WHERE u.id_puesto = '".$POST['puesto']."'";
+			if($POST['permiso'] != ""){
+				$where.= " AND u.permiso = '".$POST['permiso']."'";
+			}
+			if(isset($POST['notificaciones'])){
+				$where.= " AND u.envio_correo = '".$POST['notificaciones']."'";
+			}
+		}elseif($POST['permiso'] != ""){
+			$where.= " AND u.permiso = '".$POST['permiso']."'";
+			if(isset($POST['notificaciones'])){
+				$where.= " AND u.envio_correo = '".$POST['notificaciones']."'";
+			}
+		}elseif(isset($POST['notificaciones'])){
+				$where.= " AND u.envio_correo = '".$POST['notificaciones']."'";
+			}
+		if($where != ""){
+			$query.= $where;
+		}
+		$query .= " ORDER BY u.nombre LIMIT ".$start.", ".$limit;
+
+		$results = $this->db->query($query);
+		$num_results = $results->num_rows();
+		//echo $this->db->last_query();
+		if($num_results > 0){
+			return $results;
+		}else{
+			return false;
+		}
+	}
+	
+	public function getQueryTotal($POST){
 		$query = "SELECT u.*, p.*, per.*, CASE u.envio_correo WHEN 1 THEN 'SI' ELSE 'NO' END as notificaciones FROM usuarios u INNER JOIN puestos p ON u.id_puesto=p.id_puesto INNER JOIN cat_permisos per ON u.permiso=per.clave_permiso ";
 		$this->db->query($query);
 		$where = "";
@@ -272,6 +321,36 @@ WHERE e.id_puesto = ".$id_puesto.") AND a.activo = 1 order by a.nombre_documento
 			return true;
 		}else{
 			return false;
+		}
+	}
+	
+	public function getCurrentPassword(){
+		$this->db->select('password');
+		$this->db->from('usuarios');
+		$this->db->where('id_usuario', $this->session->userdata('id_usuario'));
+
+		$results = $this->db->get();
+		$num_rows = $results->num_rows();
+		if($num_rows > 0){
+			return $results;
+		}else{
+			return false;
+		}
+	}
+	
+	public function actualizarPassword($datos){
+		$this->db->where('id_usuario', $this->session->userdata('id_usuario'));
+		$this->db->set($datos);
+		$query = $this->db->update('usuarios');
+
+		if($query){
+			$resultado['state'] = true;
+			$resultado['message'] = "El password se ha actualizado correctamente.";
+			return $resultado;
+		}else{
+			$resultado['state'] = false;
+			$resultado['message'] = $this->db->_error_message();
+			return $resultado;
 		}
 	}
 }

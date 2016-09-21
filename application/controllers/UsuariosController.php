@@ -5,6 +5,7 @@ class UsuariosController extends CI_Controller{
 		parent::__construct();
 		$this->load->model('DocumentosModel');
 		$this->load->model('UsuariosModel');
+		$this->load->library('pagination');
 		$this->load->library('form_validation');
 		$this->load->library('email');
 	}
@@ -252,18 +253,42 @@ class UsuariosController extends CI_Controller{
 	    }
 	}
 	
-	public function getUsers(){
+	public function getUsers($desde){
 		if($this->session->userdata('logged_in') && $this->session->userdata('permiso') == "A"){
-			/*try{
-				$this->delete_cache();
-			}catch(Exception $e){
-				echo "Excepcion de cache";
-			}*/
-			$this->output->cache(1);
-			$usuarios = $this->UsuariosModel->getUsers($_POST);
-			$datos['puestos'] = $this->DocumentosModel->getPuestos();
-			$datos['permisos'] = $this->UsuariosModel->getCatalogoPermisosUsuarios();
-			if($usuarios){
+			$str ="";
+			foreach($_GET as $k => $v){
+				$str.= $k."=".$v."&";
+			}
+			$config = array();
+			$config['per_page'] = 15;
+			$desde = (null ==! $this->uri->segment(2)) ? $this->uri->segment(2) : 0;	
+			$datos['listaUsuarios'] = $this->UsuariosModel->getUsers($_GET, $config['per_page'], $desde);
+			$datos['getQueryTotal'] = $this->UsuariosModel->getQueryTotal($_GET, $config['per_page'], $desde);
+			if($datos['listaUsuarios'] != false){ 
+				$num_reg = $datos['getQueryTotal']->num_rows();
+			}else{
+				$num_reg=0;
+			}
+			$config['base_url'] = base_url().'getusers/';
+			$config['total_rows'] = $num_reg;
+			$config['uri_segment'] = 2;
+			$config['first_url'] = 0 . "?" . $str;
+			$config['page_query_string'] = FALSE;
+			$config['cur_tag_open'] = '<li class="active"><a href="#">';
+			$config['cur_tag_close'] = '</a></li>';
+			$config['num_tag_open'] = '<li>';
+			$config['num_tag_close'] = '</li>';
+			$config['next_link'] = '&raquo;';
+			$config['next_tag_open'] = '<li>';
+			$config['next_tag_close'] = '</li>';
+			$config['prev_link'] = '&laquo;';
+			$config['prev_tag_open'] = '<li>';
+			$config['prev_tag_close'] = '</li>';
+			$config['reuse_query_string'] = true;
+			$this->pagination->initialize($config);
+			
+			$datos['paginacion'] =  $this->pagination->create_links();
+			if($num_reg > 0){
 				$tpl = array (
 					'table_open' => '<table border=1 id="ultimosCambios" cellpadding=2 cellspacing=1 width=100%>',
 					'heading_row_start'   => '<tr style="background-color: #2ecc71; font-weight:bold; color:white; padding:1em;">',
@@ -290,15 +315,19 @@ class UsuariosController extends CI_Controller{
 				"Contraseña<br /><span style='color:white;' class='glyphicon glyphicon-refresh'></span>",
 				"Eliminar<br /><span style='color:white;' class='glyphicon glyphicon-remove-sign'></span>"));
 				$this->table->set_template($tpl);
-				foreach($usuarios->result() as $u){
+				
+				$i = 0;
+				foreach($datos['listaUsuarios']->result() as $u){
 					if($u->notificaciones == "SI"){$notificaciones = "<span style='color:green;' class='glyphicon glyphicon-ok'></span>";}else{$notificaciones = "<span style='color:red;' class='glyphicon glyphicon-remove'></span>";}
 					$usuario = "<a href='".base_url()."usuario/".$u->id_usuario."'>".$u->usuario."</a>";
 					$editar = "<a href='".base_url()."usuario/".$u->id_usuario."'><span style='color:black;' class='glyphicon glyphicon-pencil'></span></a>";
-					$resetPass = "<a href='javascript:if(confirm(\"¿Realmente desea reestablecer esta contraseña?.\")){location.href=\"./resetPassword/".$u->id_usuario."\";}'><span style='color:blue;' class='glyphicon glyphicon-refresh'></span></a>";
+					$resetPass = "<a href='javascript:if(confirm(\"¿Realmente desea reestablecer esta contraseña?.\")){location.href=\"../resetPassword/".$u->id_usuario."\";}'><span style='color:blue;' class='glyphicon glyphicon-refresh'></span></a>";
 					$eliminar = "<a href='javascript:if(confirm(\"¿Realmente desea eliminar este usuario?, después de esto ya no habrá vuelta atrás.\")){location.href=\"./eliminarUsuario/".$u->id_usuario."\";}'><span style='color:red;' class='glyphicon glyphicon-remove-sign'></span></a>";
 					$this->table->add_row($u->no_empleado, $usuario, $u->nombre, $u->correo, $u->nombre_puesto, $u->titulo_permiso, $notificaciones, $editar, $resetPass, $eliminar);
+					$i++;
 				}
 				$datos['tablaUsuarios'] = $this->table->generate();
+				$datos['leyenda'] = "<div style='width:100%;text-align:left;'>Se encontr&oacute; una coincidencia con un total de <span style='font-weight:900;color:red;'>".$num_reg."</span> registro(s).<br />Mostrando resultados del ".($desde+1)." al ".($desde+$i)."</div>";
 				$this->load->view('templates/includes.php');
 				$this->load->view('templates/navigation-bar.php');
 				$this->load->view('usuarios/tabla_busqueda_usuarios.php', $datos);
@@ -311,6 +340,7 @@ class UsuariosController extends CI_Controller{
 				$this->load->view('templates/mensaje_generico', $datos);
 				$this->load->view('templates/footer.php');
 			}
+			
 		}else{
 	      //Si no hay sesión o no tiene permiso se le hace saber;
 			$datos['texto1'] = "Página Restringida";
@@ -412,6 +442,22 @@ class UsuariosController extends CI_Controller{
 		}
 	}
 	
+	public function ajustesCuenta($seccion){
+		if($this->session->userdata('logged_in')){
+			$usuario['usuario'] = $this->UsuariosModel->getUsuario('id_usuario', $this->session->userdata('id_usuario'));
+			$usuario['puestos'] = $this->DocumentosModel->getPuestos();
+			$this->load->view('templates/includes');
+			$this->load->view('templates/navigation-bar');
+			$this->load->view('usuarios/list-group_ajustes-usuario');
+			$this->load->view('usuarios/'.$seccion, $usuario);
+			$this->load->view('templates/footer');
+		}else{
+			$url = base_url(uri_string());
+			$this->session->set_flashdata('pagReq', str_replace('/','-',$url));
+			redirect('loginUrl', 'refresh');
+		}
+	}
+	
 	public function delete_cache(){
 		$CI =& get_instance();
 		$path = $CI->config->item('cache_path');
@@ -428,6 +474,37 @@ class UsuariosController extends CI_Controller{
 			}
 		}
 		closedir($handle);
+	}
+	
+	public function cambiarPassword(){
+		$this->form_validation->set_rules('currentPassword', 'currentPassword', 'callback_currentPassword');
+		if($this->form_validation->run() == true){
+			$datos['password'] = md5($this->input->post('pass1'));
+			$resultado = $this->UsuariosModel->actualizarPassword($datos);
+			if($resultado['state'])
+			$datos["texto1"] = "¡Exito!";
+			$datos["texto2"] = $resultado['message'];
+			$this->load->view('templates/includes');
+			$this->load->view('templates/navigation-bar');
+			$this->load->view('templates/mensaje_generico', $datos);
+			$this->load->view('templates/footer');
+		}else{
+			$datos["texto1"] = "¡Error!";
+			$datos["texto2"] = "El password actual no es el correcto.";
+			$this->load->view('templates/includes');
+			$this->load->view('templates/navigation-bar');
+			$this->load->view('templates/mensaje_generico', $datos);
+			$this->load->view('templates/footer');
+		}
+	}
+	
+	public function currentPassword(){
+		$current = $this->UsuariosModel->getCurrentPassword();
+		if(md5($this->input->post('passActual')) == $current->result()[0]->password){
+			return true;
+		}else{
+			return false;
+		}
 	}
 	
 	public function enviarMail($subject, $body, $to){

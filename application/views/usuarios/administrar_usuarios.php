@@ -12,7 +12,8 @@
 }
 </style>
 <div id="center">
-<?php echo form_open_multipart('getusers'); ?>
+<form action="getusers/0" method="get">
+<?php //echo form_open_multipart('getusers'); ?>
 <?php
 	$target = array(
 		'name' => 'target',

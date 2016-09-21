@@ -10,7 +10,7 @@ td{
 }
 </style>
 <div id="center">
-	<h2>&iexcl;Bienvenido <?php echo $this->session->userdata('nombre'); ?>!</h2>
+	<h2>&iexcl;Bienvenido(a) <?php echo $this->session->userdata('nombre'); ?>!</h2>
 	<?php
 	echo $tabla; ?>
 </div>
