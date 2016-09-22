@@ -13,7 +13,6 @@
 		<link rel="stylesheet" type="text/css" href=<?php echo base_url()."assets/bootstrap/dist/css/bootstrap.min.css" ?> />
 		<link rel="stylesheet" type="text/css" href=<?php echo base_url()."css/Font-Awesome/css/font-awesome.min.css" ?> />
 		<link rel="stylesheet" type="text/css" href=<?php echo base_url()."assets/bootstrap/dist/css/awesome-bootstrap-checkbox.css" ?> />
-		<!--<link href='https://fonts.googleapis.com/css?family=Open+Sans:600&subset=latin,latin-ext' rel='stylesheet' type='text/css'>-->
 		<link rel="stylesheet" type="text/css" href=<?php echo base_url()."css/googlefont.css" ?> />
 		<style type="text/css">
 			*{
