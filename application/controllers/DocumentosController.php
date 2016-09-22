@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 //Llamado de la clase para enviar emails
-require '/var/www/html/SGCPITIC/vendor/autoload.php'; // carga las librerias del composer.json
+require $_SERVER['DOCUMENT_ROOT'].'/SGCPITIC/vendor/autoload.php'; // carga las librerias del composer.json
 
 class DocumentosController extends CI_Controller {
 	function __construct(){

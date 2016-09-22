@@ -3,7 +3,7 @@
   <div class="container-fluid">
     <!-- Brand and toggle get grouped for better mobile display -->
     <div class="navbar-header">
-		<a class="navbar-brand" href="<?php echo base_url()."home"; ?>"><img src="<?php echo base_url()."/img/pitic-logo.png"; ?>" id="logoPitic" style="height:30px;width:95px;margin-top:-0.4em;" /></a>
+		<a class="navbar-brand" href="<?php echo base_url()."home"; ?>"><img src="<?php echo base_url()."img/pitic-logo.png"; ?>" id="logoPitic" style="height:30px;width:95px;margin-top:-0.4em;" /></a>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
