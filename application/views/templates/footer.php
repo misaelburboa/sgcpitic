@@ -3,7 +3,7 @@
 		<footer id="footer" style="
 		background-color:#006547;
 		width:100%;
-		height:10%;
+		height:2.5em;
 		font-size:1.5em;
 		margin-top:1em;
 		">
